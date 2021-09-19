@@ -1,0 +1,138 @@
+-- Progettazione Web 
+DROP DATABASE if exists wings; 
+CREATE DATABASE wings; 
+USE wings; 
+-- MySQL dump 10.13  Distrib 5.6.20, for Win32 (x86)
+--
+-- Host: localhost    Database: wings
+-- ------------------------------------------------------
+-- Server version	5.6.21
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `passeggero`
+--
+
+DROP TABLE IF EXISTS `passeggero`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `passeggero` (
+  `Documento` varchar(7) NOT NULL,
+  `Nome` varchar(45) DEFAULT NULL,
+  `Cognome` varchar(45) DEFAULT NULL,
+  `Volo` varchar(7) NOT NULL,
+  `Checkin` varchar(45) DEFAULT NULL,
+  `user` varchar(45) NOT NULL,
+  PRIMARY KEY (`Documento`,`Volo`,`user`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `passeggero`
+--
+
+LOCK TABLES `passeggero` WRITE;
+/*!40000 ALTER TABLE `passeggero` DISABLE KEYS */;
+/*!40000 ALTER TABLE `passeggero` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `rotta`
+--
+
+DROP TABLE IF EXISTS `rotta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rotta` (
+  `idRotta` varchar(7) NOT NULL,
+  `Partenza` varchar(45) DEFAULT NULL,
+  `Destinazione` varchar(45) DEFAULT NULL,
+  `Costo` decimal(6,2) DEFAULT NULL,
+  PRIMARY KEY (`idRotta`),
+  UNIQUE KEY `idRotta_UNIQUE` (`idRotta`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rotta`
+--
+
+LOCK TABLES `rotta` WRITE;
+/*!40000 ALTER TABLE `rotta` DISABLE KEYS */;
+INSERT INTO `rotta` VALUES ('AHOBLQ','Alghero','Bologna',30.00),('AHOBRI','Alghero','Bari',30.00),('AHOCTA','Alghero','Catania',30.00),('AHOMXP','Alghero','Milano Malpensa',30.00),('AHONAP','Alghero','Napoli',30.00),('AHOPMO','Alghero','Palermo',30.00),('AHOPSA','Alghero','Pisa',30.00),('AHOPSR','Alghero','Pescara',30.00),('AHOVCE','Alghero','Venezia',30.00),('BDSBLQ','Brindisi','Bologna',25.00),('BDSCAG','Brindisi','Cagliari',25.00),('BDSFCO','Brindisi','Roma Fiumicino',25.00),('BDSMXP','Brindisi','Milano Malpensa',25.00),('BDSPMO','Brindisi','Palermo',25.00),('BDSPSA','Brindisi','Pisa',25.00),('BDSTRN','Brindisi','Torino',25.00),('BDSVCE','Brindisi','Venezia',25.00),('BGYAHO','Milano Bergamo','Alghero',40.00),('BGYBLQ','Milano Bergamo','Bologna',30.00),('BGYCAG','Milano Bergamo','Cagliari',40.00),('BGYCIA','Milano Bergamo','Roma Ciampino',40.00),('BGYCTA','Milano Bergamo','Catania',40.00),('BGYFCO','Milano Bergamo','Roma Fiumicino',40.00),('BGYPMO','Milano Bergamo','Palermo',40.00),('BLQAHO','Bologna','Alghero',35.00),('BLQBDS','Bologna','Brindisi',35.00),('BLQBRI','Bologna','Bari',35.00),('BLQCRV','Bologna','Crotone',35.00),('BLQCTA','Bologna','Catania',35.00),('BLQPMO','Bologna','Palermo',35.00),('BLQSUF','Bologna','Lamezia Terme',35.00),('BLQTPS','Bologna','Trapano',35.00),('BRIAHO','Bari','Alghero',30.00),('BRIBLQ','Bari','Bologna',30.00),('BRICAG','Bari','Cagliari',30.00),('BRICTA','Bari','Catania',30.00),('BRICUF','Bari','Cuneo',30.00),('BRIFCO','Bari','Roma Fiumicino',30.00),('BRIGOA','Bari','Genova',30.00),('BRILIN','Bari','Milano Linate',30.00),('BRIPMO','Bari','Palermo',30.00),('BRIPSA','Bari','Pisa',30.00),('BRITRN','Bari','Torino',30.00),('BRIVCE','Bari','Venezia',30.00),('BRIVRN','Bari','Verona',30.00),('CAGBDS','Cagliari','Brindisi',35.00),('CAGBGQ','Cagliari','Bologna',35.00),('CAGBRI','Cagliari','Bari',35.00),('CAGCTA','Cagliari','Catania',35.00),('CAGFCO','Cagliari','Roma Fiumicino',35.00),('CAGLIN','Cagliari','Linate',35.00),('CAGPMF','Cagliari','Parma',35.00),('CAGPMO','Cagliari','Palermo',35.00),('CAGPSA','Cagliari','Pisa',35.00),('CAGTRS','Cagliari','Trieste',35.00),('CIACAG','Roma Ciampino','Cagliari',30.00),('CIATPS','Roma Ciampino','Trapani',30.00),('CRVBLQ','Crotone','Bologna',20.00),('CRVMXP','Crotone','Milano Malpensa',20.00),('CTAAHO','Catania','Alghero',30.00),('CTABLQ','Catania','Bologna',30.00),('CTABRI','Catania','Bari',30.00),('CTACIA','Catania','Roma Ciampino',30.00),('CTAMXP','Catania','Milano Malpensa',30.00),('CTANAP','Catania','Napoli',30.00),('CTAPSA','Catania','Pisa',30.00),('CTATRN','Catania','Torino',30.00),('FCOBDS','Roma Fiumicino','Brindisi',35.00),('FCOBRI','Roma Fiumicino','Bari',35.00),('FCOCTA','Roma Fiumicino','Catania',35.00),('FCOPMO','Roma Fiumicino','Palermo',35.00),('MXPAHO','Milano Maplensa','Alghero',40.00),('MXPBRI','Milano Maplensa','Bari',40.00),('MXPCAG','Milano Maplensa','Cagliari',40.00),('MXPCTA','Milano Maplensa','Catania',40.00),('MXPPMO','Milano Maplensa','Palermp',40.00),('MXPSUF','Milano Maplensa','Lamezia Terme',40.00),('MXPTPS','Milano Maplensa','Trapani',40.00),('PEGCTA','Perugia','Catania',25.00),('PEGPMO','Perugia','Palermo',25.00),('PEGSUF','Perugia','Lamezia Terme',25.00),('PMOBDS','Palermo','Brindisi',30.00),('PMOBLQ','Palermo','Bologna',30.00),('PMOBRI','Palermo','Bari',30.00),('PMOCIA','Palermo','Roma Ciampino',30.00),('PMOLIN','Palermo','Milano Linate',30.00),('PMONAP','Palermo','Napoli',30.00),('PMOPSA','Palermo','Pisa',30.00),('PMOTRN','Palermo','Torino',30.00),('PMOVCE','Palermo','Venezia',30.00),('PMOVRN','Palermo','Verona',30.00),('PSAAHO','Pisa','Alghero',25.00),('PSABDS','Pisa','Brindis',25.00),('PSABRI','Pisa','Bari',25.00),('PSACAG','Pisa','Cagliari',25.00),('PSACTA','Pisa','Catania',25.00),('PSAPMO','Pisa','Palermo',25.00),('PSASUF','Pisa','Lamezia Terme',25.00),('PSATPS','Pisa','Trapani',25.00),('PSRCAG','Pescara','Cagliari',20.00),('PSRCTA','Pescara','Catania',20.00),('PSRLIN','Pescara','Milano Linate',20.00),('PSRTPS','Pescara','Trapani',20.00),('PSRTRN','Pescara','Torino',20.00),('SUFBLQ','Lamezia Terme','Bologna',25.00),('SUFLIN','Lamezia Terme','Milano Linate',25.00),('SUFPSA','Lamezia Terme','Pisa',25.00),('SUFTPS','Lamezia Terme','Trapani',25.00),('SUFTRN','Lamezia Terme','Torino',25.00),('TPSBGY','Trapani','Bergamo',25.00),('TPSBLQ','Trapani','Bologna',25.00),('TPSCIA','Trapani','Roma Ciampino',25.00),('TPSPSA','Trapani','Pisa',25.00),('TPSPSR','Trapani','Pescara',25.00),('TPSSUF','Trapani','Lamezia Terme',25.00),('TPSVCE','Trapani','Venezia',25.00),('TSFAHO','Treviso','Alghero',20.00),('TSFCAG','Treviso','Cagliari',20.00),('TSFNAP','Treviso','Napoli',20.00),('TSFSUF','Treviso','Lamezia Terme',20.00),('TSFTPS','Treviso','Trapani',20.00);
+/*!40000 ALTER TABLE `rotta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `idUser` int(11) NOT NULL AUTO_INCREMENT,
+  `Nome` varchar(45) DEFAULT NULL,
+  `Cognome` varchar(45) DEFAULT NULL,
+  `Email` varchar(45) DEFAULT NULL,
+  `Password` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idUser`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `volo`
+--
+
+DROP TABLE IF EXISTS `volo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `volo` (
+  `idVolo` int(11) NOT NULL AUTO_INCREMENT,
+  `Rotta` varchar(7) DEFAULT NULL,
+  `PostiOccupati` int(11) DEFAULT NULL,
+  `Data` date DEFAULT NULL,
+  `Ora` time DEFAULT NULL,
+  PRIMARY KEY (`idVolo`)
+) ENGINE=InnoDB AUTO_INCREMENT=381 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `volo`
+--
+
+LOCK TABLES `volo` WRITE;
+/*!40000 ALTER TABLE `volo` DISABLE KEYS */;
+INSERT INTO `volo` VALUES (1,'AHOBLQ',0,'2021-07-08','12:00:00'),(2,'AHOBLQ',0,'2021-07-08','12:00:00'),(3,'AHOBLQ',0,'2021-07-09','12:00:00'),(4,'AHOBLQ',0,'2021-07-10','12:00:00'),(5,'AHOBLQ',0,'2021-07-11','12:00:00'),(6,'AHOBLQ',0,'2021-07-12','12:00:00'),(7,'AHOBLQ',0,'2021-07-13','12:00:00'),(8,'AHOBLQ',0,'2021-07-14','12:00:00'),(9,'AHOBLQ',0,'2021-07-15','12:00:00'),(10,'AHOBLQ',0,'2021-07-16','12:00:00'),(11,'AHOBLQ',0,'2021-07-17','12:00:00'),(12,'AHOBLQ',0,'2021-07-18','12:00:00'),(13,'AHOBLQ',0,'2021-07-19','12:00:00'),(14,'AHOBLQ',0,'2021-07-20','12:00:00'),(15,'AHOBLQ',0,'2021-07-21','12:00:00'),(16,'AHOBLQ',0,'2021-07-22','12:00:00'),(17,'AHOBLQ',0,'2021-07-23','12:00:00'),(18,'AHOBLQ',0,'2021-07-24','12:00:00'),(19,'AHOBLQ',0,'2021-07-25','12:00:00'),(20,'AHOBLQ',0,'2021-07-26','12:00:00'),(21,'AHOBLQ',0,'2021-07-27','12:00:00'),(22,'AHOBLQ',0,'2021-07-28','12:00:00'),(23,'AHOBLQ',0,'2021-07-28','12:00:00'),(24,'AHOBLQ',0,'2021-07-30','12:00:00'),(25,'AHOBLQ',0,'2021-07-31','12:00:00'),(26,'AHOBLQ',0,'2021-08-08','12:00:00'),(27,'AHOBLQ',0,'2021-08-09','12:00:00'),(28,'AHOBLQ',0,'2021-08-10','12:00:00'),(29,'AHOBLQ',0,'2021-08-11','12:00:00'),(30,'AHOBLQ',0,'2021-08-12','12:00:00'),(31,'AHOBLQ',0,'2021-08-13','12:00:00'),(32,'AHOBLQ',0,'2021-08-14','12:00:00'),(33,'AHOBLQ',0,'2021-08-15','12:00:00'),(34,'AHOBLQ',0,'2021-08-16','12:00:00'),(35,'AHOBLQ',0,'2021-08-17','12:00:00'),(36,'AHOBLQ',0,'2021-08-18','12:00:00'),(37,'AHOBLQ',0,'2021-08-19','12:00:00'),(38,'AHOBLQ',0,'2021-08-20','12:00:00'),(39,'AHOBLQ',0,'2021-08-21','12:00:00'),(40,'AHOBLQ',0,'2021-08-22','12:00:00'),(41,'AHOBLQ',0,'2021-08-23','12:00:00'),(42,'AHOBLQ',0,'2021-08-24','12:00:00'),(43,'AHOBLQ',0,'2021-08-25','12:00:00'),(44,'AHOBLQ',0,'2021-08-26','12:00:00'),(45,'AHOBLQ',0,'2021-08-27','12:00:00'),(46,'AHOBLQ',0,'2021-08-28','12:00:00'),(47,'AHOBLQ',0,'2021-08-28','12:00:00'),(48,'AHOBLQ',0,'2021-08-30','12:00:00'),(49,'AHOBRI',0,'2021-07-08','10:00:00'),(50,'AHOBRI',0,'2021-07-09','10:00:00'),(51,'AHOBRI',0,'2021-07-10','10:00:00'),(52,'AHOBRI',0,'2021-07-11','10:00:00'),(53,'AHOBRI',0,'2021-07-12','10:00:00'),(54,'AHOBRI',0,'2021-07-13','10:00:00'),(55,'AHOBRI',0,'2021-07-14','10:00:00'),(56,'AHOBRI',0,'2021-07-15','10:00:00'),(57,'AHOBRI',0,'2021-07-16','10:00:00'),(58,'AHOBRI',0,'2021-07-17','10:00:00'),(59,'AHOBRI',0,'2021-07-18','10:00:00'),(60,'AHOBRI',0,'2021-07-19','10:00:00'),(61,'AHOBRI',0,'2021-07-20','10:00:00'),(62,'AHOBRI',0,'2021-07-21','10:00:00'),(63,'AHOBRI',0,'2021-07-22','10:00:00'),(64,'AHOBRI',0,'2021-07-23','10:00:00'),(65,'AHOBRI',0,'2021-07-24','10:00:00'),(66,'AHOBRI',0,'2021-07-25','10:00:00'),(67,'AHOBRI',0,'2021-07-26','10:00:00'),(68,'AHOBRI',0,'2021-07-27','10:00:00'),(69,'AHOBRI',0,'2021-07-28','10:00:00'),(70,'AHOBRI',0,'2021-07-29','10:00:00'),(71,'AHOBRI',0,'2021-07-30','10:00:00'),(72,'AHOBRI',0,'2021-07-31','10:00:00'),(73,'AHOBRI',0,'2021-08-08','10:00:00'),(74,'AHOBRI',0,'2021-08-09','10:00:00'),(75,'AHOBRI',0,'2021-08-10','10:00:00'),(76,'AHOBRI',0,'2021-08-11','10:00:00'),(77,'AHOBRI',0,'2021-08-12','10:00:00'),(78,'AHOBRI',0,'2021-08-13','10:00:00'),(79,'AHOBRI',0,'2021-08-14','10:00:00'),(80,'AHOBRI',0,'2021-08-15','10:00:00'),(81,'AHOBRI',0,'2021-08-16','10:00:00'),(82,'AHOBRI',0,'2021-08-17','10:00:00'),(83,'AHOBRI',0,'2021-08-18','10:00:00'),(84,'AHOBRI',0,'2021-08-19','10:00:00'),(85,'AHOBRI',0,'2021-08-20','10:00:00'),(86,'AHOBRI',0,'2021-08-21','10:00:00'),(87,'AHOBRI',0,'2021-08-22','10:00:00'),(88,'AHOBRI',0,'2021-08-23','10:00:00'),(89,'AHOBRI',0,'2021-08-24','10:00:00'),(90,'AHOBRI',0,'2021-08-25','10:00:00'),(91,'AHOBRI',0,'2021-08-26','10:00:00'),(92,'AHOBRI',0,'2021-08-27','10:00:00'),(93,'AHOBRI',0,'2021-08-28','10:00:00'),(94,'AHOBRI',0,'2021-08-29','10:00:00'),(95,'AHOBRI',0,'2021-08-30','10:00:00'),(96,'BGYCIA ',0,'2021-07-10','16:00:00'),(97,'BGYCIA ',0,'2021-07-11','16:00:00'),(98,'BGYCIA ',0,'2021-07-12','16:00:00'),(99,'BGYCIA ',0,'2021-07-13','16:00:00'),(100,'BGYCIA ',0,'2021-07-14','16:00:00'),(101,'BGYCIA ',0,'2021-07-15','16:00:00'),(102,'BGYCIA ',0,'2021-07-16','16:00:00'),(103,'BGYCIA ',0,'2021-07-17','16:00:00'),(104,'BGYCIA ',0,'2021-07-18','16:00:00'),(105,'BGYCIA ',0,'2021-07-19','16:00:00'),(106,'BGYCIA ',0,'2021-07-20','16:00:00'),(107,'BGYCIA ',0,'2021-07-21','16:00:00'),(108,'BGYCIA ',0,'2021-07-22','16:00:00'),(109,'BGYCIA ',0,'2021-07-23','16:00:00'),(110,'BGYCIA ',0,'2021-07-24','16:00:00'),(111,'BGYCIA ',0,'2021-07-25','16:00:00'),(112,'BGYCIA ',0,'2021-07-26','16:00:00'),(113,'BGYCIA ',0,'2021-07-27','16:00:00'),(114,'BGYCIA ',0,'2021-07-28','16:00:00'),(115,'BGYCIA ',0,'2021-07-29','16:00:00'),(116,'BGYCIA ',0,'2021-07-30','16:00:00'),(117,'BGYCIA ',0,'0000-00-00','16:00:00'),(118,'BGYCIA ',0,'2021-08-11','16:00:00'),(119,'BGYCIA ',0,'2021-08-12','16:00:00'),(120,'BGYCIA ',0,'2021-08-13','16:00:00'),(121,'BGYCIA ',0,'2021-08-14','16:00:00'),(122,'BGYCIA ',0,'2021-08-15','16:00:00'),(123,'BGYCIA ',0,'2021-08-16','16:00:00'),(124,'BGYCIA ',0,'2021-08-17','16:00:00'),(125,'BGYCIA ',0,'2021-08-18','16:00:00'),(126,'BGYCIA ',0,'2021-08-19','16:00:00'),(127,'BGYCIA ',0,'2021-08-20','16:00:00'),(128,'BGYCIA ',0,'2021-08-21','16:00:00'),(129,'BGYCIA ',0,'2021-08-22','16:00:00'),(130,'BGYCIA ',0,'2021-08-23','16:00:00'),(131,'BGYCIA ',0,'2021-08-24','16:00:00'),(132,'BGYCIA ',0,'2021-08-25','16:00:00'),(133,'BGYCIA ',0,'2021-08-26','16:00:00'),(134,'BGYCIA ',0,'2021-08-27','16:00:00'),(135,'BGYCIA ',0,'2021-08-28','16:00:00'),(136,'BGYCIA ',0,'2021-08-29','16:00:00'),(137,'BGYCIA ',0,'2021-08-30','16:00:00'),(138,'BLQBRI ',0,'2021-07-08','15:00:00'),(139,'BLQBRI ',0,'2021-07-09','15:00:00'),(140,'BLQBRI ',0,'2021-07-10','15:00:00'),(141,'BLQBRI ',0,'2021-07-11','15:00:00'),(142,'BLQBRI ',0,'2021-07-12','15:00:00'),(143,'BLQBRI ',0,'2021-07-13','15:00:00'),(144,'BLQBRI ',0,'2021-07-14','15:00:00'),(145,'BLQBRI ',0,'2021-07-15','15:00:00'),(146,'BLQBRI ',0,'2021-07-16','15:00:00'),(147,'BLQBRI ',0,'2021-07-17','15:00:00'),(148,'BLQBRI ',0,'2021-07-18','15:00:00'),(149,'BLQBRI ',0,'2021-07-19','15:00:00'),(150,'BLQBRI ',0,'2021-07-20','15:00:00'),(151,'BLQBRI ',0,'2021-07-21','15:00:00'),(152,'BLQBRI ',0,'2021-07-22','15:00:00'),(153,'BLQBRI ',0,'2021-07-23','15:00:00'),(154,'BLQBRI ',0,'2021-07-24','15:00:00'),(155,'BLQBRI ',0,'2021-07-25','15:00:00'),(156,'BLQBRI ',0,'2021-07-26','15:00:00'),(157,'BLQBRI ',0,'2021-07-27','15:00:00'),(158,'BLQBRI ',0,'2021-08-08','15:00:00'),(159,'BLQBRI ',0,'2021-08-09','15:00:00'),(160,'BLQBRI ',0,'2021-08-10','15:00:00'),(161,'BLQBRI ',0,'2021-08-11','15:00:00'),(162,'BLQBRI ',0,'2021-08-12','15:00:00'),(163,'BLQBRI ',0,'2021-08-13','15:00:00'),(164,'BLQBRI ',0,'2021-08-14','15:00:00'),(165,'BLQBRI ',0,'2021-08-15','15:00:00'),(166,'BLQBRI ',0,'2021-08-16','15:00:00'),(167,'BLQBRI ',0,'2021-08-17','15:00:00'),(168,'BLQBRI ',0,'2021-08-18','15:00:00'),(169,'BLQBRI ',0,'2021-08-19','15:00:00'),(170,'BLQBRI ',0,'2021-08-20','15:00:00'),(171,'BLQBRI ',0,'2021-08-21','15:00:00'),(172,'BLQBRI ',0,'2021-08-22','15:00:00'),(173,'BLQBRI ',0,'2021-08-23','15:00:00'),(174,'BLQBRI ',0,'2021-08-24','15:00:00'),(175,'BLQBRI ',0,'2021-08-25','15:00:00'),(176,'BLQBRI ',0,'2021-08-26','15:00:00'),(177,'BLQBRI ',0,'2021-08-27','15:00:00'),(178,'BLQCTA ',0,'2021-07-08','09:00:00'),(179,'BLQCTA ',0,'2021-07-09','09:00:00'),(180,'BLQCTA ',0,'2021-07-10','09:00:00'),(181,'BLQCTA ',0,'2021-07-11','09:00:00'),(182,'BLQCTA ',0,'2021-07-12','09:00:00'),(183,'BLQCTA ',0,'2021-07-13','09:00:00'),(184,'BLQCTA ',0,'2021-07-14','09:00:00'),(185,'BLQCTA ',0,'2021-07-15','09:00:00'),(186,'BLQCTA ',0,'2021-07-16','09:00:00'),(187,'BLQCTA ',0,'2021-07-17','09:00:00'),(188,'BLQCTA ',0,'2021-07-28','09:00:00'),(189,'BLQCTA ',0,'2021-07-19','09:00:00'),(190,'BLQCTA ',0,'2021-07-20','09:00:00'),(191,'BLQCTA ',0,'2021-07-21','09:00:00'),(192,'BLQCTA ',0,'2021-07-22','09:00:00'),(193,'BLQCTA ',0,'2021-07-23','09:00:00'),(194,'BLQCTA ',0,'2021-07-24','09:00:00'),(195,'BLQCTA ',0,'2021-07-25','09:00:00'),(196,'BLQCTA ',0,'2021-07-26','09:00:00'),(197,'BLQCTA ',0,'2021-08-08','09:00:00'),(198,'BLQCTA ',0,'2021-08-09','09:00:00'),(199,'BLQCTA ',0,'2021-08-10','09:00:00'),(200,'BLQCTA ',0,'2021-08-11','09:00:00'),(201,'BLQCTA ',0,'2021-08-12','09:00:00'),(202,'BLQCTA ',0,'2021-08-13','09:00:00'),(203,'BLQCTA ',0,'2021-08-14','09:00:00'),(204,'BLQCTA ',0,'2021-08-15','09:00:00'),(205,'BLQCTA ',0,'2021-08-16','09:00:00'),(206,'BLQCTA ',0,'2021-08-17','09:00:00'),(207,'BLQCTA ',0,'2021-08-28','09:00:00'),(208,'BLQCTA ',0,'2021-08-19','09:00:00'),(209,'BLQCTA ',0,'2021-08-20','09:00:00'),(210,'BLQCTA ',0,'2021-08-21','09:00:00'),(211,'BLQCTA ',0,'2021-08-22','09:00:00'),(212,'BLQCTA ',0,'2021-08-23','09:00:00'),(213,'BLQCTA ',0,'2021-08-24','09:00:00'),(214,'BLQCTA ',0,'2021-08-25','09:00:00'),(215,'BLQCTA ',0,'2021-08-26','09:00:00'),(216,'BLQPMO ',0,'2021-07-08','08:00:00'),(217,'BLQPMO ',0,'2021-07-09','08:00:00'),(218,'BLQPMO ',0,'2021-07-10','08:00:00'),(219,'BLQPMO ',0,'2021-07-11','08:00:00'),(220,'BLQPMO ',0,'2021-07-12','08:00:00'),(221,'BLQPMO ',0,'2021-07-13','08:00:00'),(222,'BLQPMO ',0,'2021-07-14','08:00:00'),(223,'BLQPMO ',0,'2021-07-15','08:00:00'),(224,'BLQPMO ',0,'2021-07-16','08:00:00'),(225,'BLQPMO ',0,'2021-07-17','08:00:00'),(226,'BLQPMO ',0,'2021-07-18','08:00:00'),(227,'BLQPMO ',0,'2021-07-19','08:00:00'),(228,'BLQPMO ',0,'2021-07-20','08:00:00'),(229,'BLQPMO ',0,'2021-07-21','08:00:00'),(230,'BLQPMO ',0,'2021-07-22','08:00:00'),(231,'BLQPMO ',0,'2021-08-08','08:00:00'),(232,'BLQPMO ',0,'2021-08-09','08:00:00'),(233,'BLQPMO ',0,'2021-08-10','08:00:00'),(234,'BLQPMO ',0,'2021-08-11','08:00:00'),(235,'BLQPMO ',0,'2021-08-12','08:00:00'),(236,'BLQPMO ',0,'2021-08-13','08:00:00'),(237,'BLQPMO ',0,'2021-08-14','08:00:00'),(238,'BLQPMO ',0,'2021-08-15','08:00:00'),(239,'BLQPMO ',0,'2021-08-16','08:00:00'),(240,'BLQPMO ',0,'2021-08-17','08:00:00'),(241,'BLQPMO ',0,'2021-08-18','08:00:00'),(242,'BLQPMO ',0,'2021-08-19','08:00:00'),(243,'BLQPMO ',0,'2021-08-20','08:00:00'),(244,'BLQPMO ',0,'2021-08-21','08:00:00'),(245,'BLQPMO ',0,'2021-08-22','08:00:00'),(246,'BRICTA',0,'2021-07-08','18:00:00'),(247,'BRICTA',0,'2021-07-09','18:00:00'),(248,'BRICTA',0,'2021-07-10','18:00:00'),(249,'BRICTA',0,'2021-07-11','18:00:00'),(250,'BRICTA',0,'2021-07-12','18:00:00'),(251,'BRICTA',0,'2021-07-16','18:00:00'),(252,'BRICTA',0,'2021-07-18','18:00:00'),(253,'BRICTA',0,'2021-07-19','18:00:00'),(254,'BRICTA',0,'2021-07-20','18:00:00'),(255,'BRICTA',0,'2021-07-22','18:00:00'),(256,'BRICTA',0,'2021-07-23','18:00:00'),(257,'BRICTA',0,'2021-07-26','18:00:00'),(258,'BRICTA',0,'2021-07-28','18:00:00'),(259,'BRICTA',0,'2021-07-30','18:00:00'),(260,'BRICTA',0,'2021-08-08','18:00:00'),(261,'BRICTA',0,'2021-08-09','18:00:00'),(262,'BRICTA',0,'2021-08-10','18:00:00'),(263,'BRICTA',0,'2021-08-11','18:00:00'),(264,'BRICTA',0,'2021-08-12','18:00:00'),(265,'BRICTA',0,'2021-08-16','18:00:00'),(266,'BRICTA',0,'2021-08-18','18:00:00'),(267,'BRICTA',0,'2021-08-19','18:00:00'),(268,'BRICTA',0,'2021-08-20','18:00:00'),(269,'BRICTA',0,'2021-08-22','18:00:00'),(270,'BRICTA',0,'2021-08-23','18:00:00'),(271,'BRICTA',0,'2021-08-26','18:00:00'),(272,'BRICTA',0,'2021-08-28','18:00:00'),(273,'BRICTA',0,'2021-08-30','18:00:00'),(274,'MXPCTA',0,'2021-07-08','21:00:00'),(275,'MXPCTA',0,'2021-07-09','21:00:00'),(276,'MXPCTA',0,'2021-07-10','21:00:00'),(277,'MXPCTA',0,'2021-07-11','21:00:00'),(278,'MXPCTA',0,'2021-07-12','21:00:00'),(279,'MXPCTA',0,'2021-07-13','21:00:00'),(280,'MXPCTA',0,'2021-07-14','21:00:00'),(281,'MXPCTA',0,'2021-07-17','21:00:00'),(282,'MXPCTA',0,'2021-07-18','21:00:00'),(283,'MXPCTA',0,'2021-07-19','21:00:00'),(284,'MXPCTA',0,'2021-07-20','21:00:00'),(285,'MXPCTA',0,'2021-07-27','21:00:00'),(286,'MXPCTA',0,'2021-07-28','21:00:00'),(287,'MXPCTA',0,'2021-07-30','21:00:00'),(288,'MXPCTA',0,'2021-08-08','21:00:00'),(289,'MXPCTA',0,'2021-08-09','21:00:00'),(290,'MXPCTA',0,'2021-08-10','21:00:00'),(291,'MXPCTA',0,'2021-08-11','21:00:00'),(292,'MXPCTA',0,'2021-08-12','21:00:00'),(293,'MXPCTA',0,'2021-08-13','21:00:00'),(294,'MXPCTA',0,'2021-08-14','21:00:00'),(295,'MXPCTA',0,'2021-08-17','21:00:00'),(296,'MXPCTA',0,'2021-08-18','21:00:00'),(297,'MXPCTA',0,'2021-08-19','21:00:00'),(298,'MXPCTA',0,'2021-08-20','21:00:00'),(299,'MXPCTA',0,'2021-08-27','21:00:00'),(300,'MXPCTA',0,'2021-08-28','21:00:00'),(301,'MXPCTA',0,'2021-08-30','21:00:00'),(302,'PSACTA',0,'2021-08-08','10:00:00'),(303,'PSACTA',0,'2021-08-09','10:00:00'),(304,'PSACTA',0,'2021-08-10','10:00:00'),(305,'PSACTA',0,'2021-08-11','10:00:00'),(306,'PSACTA',0,'2021-08-12','10:00:00'),(307,'PSACTA',0,'2021-08-13','10:00:00'),(308,'PSACTA',0,'2021-08-14','10:00:00'),(309,'PSACTA',0,'2021-08-15','10:00:00'),(310,'PSACTA',0,'2021-08-16','10:00:00'),(311,'PSACTA',0,'2021-08-17','10:00:00'),(312,'PSACTA',0,'2021-08-18','10:00:00'),(313,'PSACTA',0,'2021-08-19','10:00:00'),(314,'PSACTA',0,'2021-08-20','10:00:00'),(315,'PSACTA',0,'2021-07-21','10:00:00'),(316,'PSACTA',0,'2021-07-22','10:00:00'),(317,'PSACTA',0,'2021-07-23','10:00:00'),(318,'PSACTA',0,'2021-07-26','10:00:00'),(319,'PSACTA',0,'2021-07-27','10:00:00'),(320,'PSACTA',0,'2021-07-28','10:00:00'),(321,'PSASUF',0,'2021-07-08','13:00:00'),(322,'PSASUF',0,'2021-07-09','13:00:00'),(323,'PSASUF',0,'2021-07-10','13:00:00'),(324,'PSASUF',0,'2021-07-11','13:00:00'),(325,'PSASUF',0,'2021-07-12','13:00:00'),(326,'PSASUF',0,'2021-07-13','13:00:00'),(327,'PSASUF',0,'2021-07-14','13:00:00'),(328,'PSASUF',0,'2021-07-15','13:00:00'),(329,'PSASUF',0,'2021-07-16','13:00:00'),(330,'PSASUF',0,'2021-07-17','13:00:00'),(331,'PSASUF',0,'2021-07-18','13:00:00'),(332,'PSASUF',0,'2021-07-19','13:00:00'),(333,'PSASUF',0,'2021-07-20','13:00:00'),(334,'PSASUF',0,'2021-07-22','13:00:00'),(335,'PSASUF',0,'2021-07-23','13:00:00'),(336,'PSASUF',0,'2021-07-25','13:00:00'),(337,'PSASUF',0,'2021-07-27','13:00:00'),(338,'PSASUF',0,'2021-07-28','13:00:00'),(339,'PSASUF',0,'2021-07-29','13:00:00'),(340,'PSASUF',0,'2021-07-30','13:00:00'),(341,'SUFPSA',0,'2021-07-08','12:00:00'),(342,'SUFPSA',0,'2021-07-09','12:00:00'),(343,'SUFPSA',0,'2021-07-10','12:00:00'),(344,'SUFPSA',0,'2021-07-11','12:00:00'),(345,'SUFPSA',0,'2021-07-12','12:00:00'),(346,'SUFPSA',0,'2021-07-13','12:00:00'),(347,'SUFPSA',0,'2021-07-15','12:00:00'),(348,'SUFPSA',0,'2021-07-17','12:00:00'),(349,'SUFPSA',0,'2021-07-18','12:00:00'),(350,'SUFPSA',0,'2021-07-19','12:00:00'),(351,'SUFPSA',0,'2021-07-20','12:00:00'),(352,'SUFPSA',0,'2021-07-22','12:00:00'),(353,'SUFPSA',0,'2021-07-23','12:00:00'),(354,'SUFPSA',0,'2021-07-24','12:00:00'),(355,'SUFPSA',0,'2021-07-25','12:00:00'),(356,'PSASUF',0,'2021-08-18','13:00:00'),(357,'PSASUF',0,'2021-08-19','13:00:00'),(358,'PSASUF',0,'2021-08-20','13:00:00'),(359,'PSASUF',0,'2021-08-22','13:00:00'),(360,'PSASUF',0,'2021-08-23','13:00:00'),(361,'PSASUF',0,'2021-08-25','13:00:00'),(362,'PSASUF',0,'2021-08-27','13:00:00'),(363,'PSASUF',0,'2021-08-28','13:00:00'),(364,'PSASUF',0,'2021-08-29','13:00:00'),(365,'PSASUF',0,'2021-08-30','13:00:00'),(366,'SUFPSA',0,'2021-08-08','12:00:00'),(367,'SUFPSA',0,'2021-08-09','12:00:00'),(368,'SUFPSA',0,'2021-08-10','12:00:00'),(369,'SUFPSA',0,'2021-08-11','12:00:00'),(370,'SUFPSA',0,'2021-08-12','12:00:00'),(371,'SUFPSA',0,'2021-08-13','12:00:00'),(372,'SUFPSA',0,'2021-08-15','12:00:00'),(373,'SUFPSA',0,'2021-08-17','12:00:00'),(374,'SUFPSA',0,'2021-08-18','12:00:00'),(375,'SUFPSA',0,'2021-08-19','12:00:00'),(376,'SUFPSA',0,'2021-08-20','12:00:00'),(377,'SUFPSA',0,'2021-08-22','12:00:00'),(378,'SUFPSA',0,'2021-08-23','12:00:00'),(379,'SUFPSA',0,'2021-08-24','12:00:00'),(380,'SUFPSA',0,'2021-08-25','12:00:00');
+/*!40000 ALTER TABLE `volo` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2021-06-22  4:57:59
