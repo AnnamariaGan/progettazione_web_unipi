@@ -29,8 +29,8 @@
 			<!-- to do: disattivare il pulsante se non ci sono voli,
 			 o se nessun volo e stato selezionato-->
 			<form id="prenotaForm" action = "./pagamento.php"  method = "post">
-				<!-- input id="andataDiv" type="hidden" name="andataDiv" value="" / -->
-				<!-- input id="ritornoDiv" type="hidden" name="ritornoDiv" value="" / -->
+				<!-- input id="andataDiv[]" type="hidden" name="andataDiv" value="" / -->
+				<!-- input id="ritornoDiv[]" type="hidden" name="ritornoDiv" value="" / -->
 														
 				<input id="button" type="submit" disabled="true" value="PRENOTA VOLO"/>   
 			</form>
@@ -58,12 +58,15 @@
 
 	$numero = 0;
 	if (isset($bambini) ) {
+		echo $bambini;
         $numero += $bambini;
+		setcookie('bambini', $bambini);
     }
 	if (isset($adulti) ) {
         $numero += $adulti;
     }
 	setcookie('numero', $numero);
+	
 
 	echo '<div id="numero-Adulti" style="visibility: hidden;">'.$adulti.'</div>';
 	echo '<div id="numero-Bambini" style="visibility: hidden;">'.$bambini.'</div>';

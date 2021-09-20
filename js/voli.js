@@ -85,7 +85,7 @@ function rimuoviImporto(tipo, idDiv) {
 */
 
 function calcolaImporto(idVolo, tipo, remove = false) {
-    const idUtil = tipo == 'andataDiv' ? 'pA-' : 'pR-';
+    const idUtil = tipo == 'andataDiv[]' ? 'pA-' : 'pR-';
     const idPrezzo = idUtil.concat(idVolo);
 
     let adulti = document.getElementById('numero-Adulti').innerHTML;
@@ -114,8 +114,8 @@ function calcolaImporto(idVolo, tipo, remove = false) {
 }
 
 function prenotaUtility() {
-    const andataDiv = document.getElementsByName("andataDiv").length;
-    const ritornoDiv = document.getElementsByName("ritornoDiv").length;
+    const andataDiv = document.getElementsByName("andataDiv[]").length;
+    const ritornoDiv = document.getElementsByName("ritornoDiv[]").length;
     
     document.getElementById("button").disabled = (andataDiv == 0 && ritornoDiv == 0);  
 }
@@ -127,7 +127,7 @@ function rowClickUtility(idVolo, tipo) {
 
     if (idItem === undefined) {
         let newItem = document.createElement("input");
-        //newItem.id = tipo;
+        //newItem.id = idVolo;
         newItem.type = "hidden";
         newItem.name = tipo;
         newItem.value = idVolo;
@@ -158,9 +158,9 @@ function rowClick(idVolo){
     rowClickAndata(idVolo);
 }
 function rowClickAndata(idVolo){
-    rowClickUtility(idVolo, 'andataDiv');
+    rowClickUtility(idVolo, 'andataDiv[]');
 }
 
 function rowClickRitorno(idVolo){
-    rowClickUtility(idVolo, 'ritornoDiv');
+    rowClickUtility(idVolo, 'ritornoDiv[]');
 }
