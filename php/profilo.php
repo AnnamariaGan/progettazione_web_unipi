@@ -145,7 +145,7 @@
 		<br>
 		<section id = "check">
 			<h1>Effettua il check-in prima di partire.</h1>
-			<p>Puoi anche aggiungere ulteriori bagagli con un sovraprezzo di 10 euro. </p>
+			 
 			
 			<?php
 				include('./checkin.php'); 
