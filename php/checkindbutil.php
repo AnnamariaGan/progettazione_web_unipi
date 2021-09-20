@@ -37,7 +37,12 @@
 		} else {
 			echo 'adulto';
 		}
-		//echo '</div>';
+
+
+		$query2 = "UPDATE prenotazioni
+			SET `check` = `check` + 1
+			WHERE id = ".$idPrenotazione.";";
+		$stmt2 = $con->query($query2);
 	}
 
 	/*

@@ -23,6 +23,7 @@
 	$ora;
 	$partenza = '';
 	$destinazione = '';
+	$checked = 0;
 
 	//connessione al db
 	$con = mysqli_connect($dbHostname, $dbUsername, $dbPassword, $dbName);
@@ -48,6 +49,7 @@
 			$ora = $row['Ora'];
 			$partenza = $row['Partenza'];
 			$destinazione = $row['Destinazione'];
+			$checked = $row['check'];
 
 		}
 	}
@@ -150,8 +152,11 @@
 			echo ($adulti + $bambini);
 			echo '" hidden>';
 		?>
-	
-		<input id="checkedTickets" type="number" value='0' hidden>
+		<?php
+			echo '<input id="checkedTickets" type="number" value="';
+			echo $checked;
+			echo '" hidden>';
+		?> 
 			
 
 		<!-- div id="ticketList"-->
@@ -184,7 +189,10 @@
 				let loadTickets = document.createElement("div");
 				let txt = document.createTextNode(event.target.responseText);
 				loadTickets.appendChild(txt);
-				document.getElementById( "loadTicketsContainer").appendChild(loadTickets);
+				document.getElementById("loadTicketsContainer").appendChild(loadTickets);
+				
+				let checkedVal = parseInt(document.getElementById("checkedTickets").value) + 1;
+				document.getElementById("checkedTickets").value = checkedVal.toString();
 			} );
 
 			// Define what happens in case of error
