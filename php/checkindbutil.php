@@ -9,10 +9,6 @@
 		exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 	}
 
-<<<<<<< HEAD
-=======
-    //recupero quello che ho scritto
->>>>>>> 8243b86b83b39f2a2e2660b565470b356afc331c
     $nome = $_POST['Nome'];
     $cognome = $_POST['Cognome'];
 	$documento = $_POST['Documento'];
@@ -24,15 +20,9 @@
 	$idPrenotazione = $_POST['numeroPrenotazione'];
 	
 	if (isset($nome, $cognome, $documento, $bambino) ) {
-<<<<<<< HEAD
       
         $queryText = " INSERT INTO passeggero (Nome, Cognome, Documento, bambino)
                 VALUES('".$nome."', '".$cognome."', '".$documento."', '".$bambino."');";
-=======
-        //query di insert
-        $queryText = " INSERT INTO passeggero (Nome, Cognome, Documento, bambino, prenotazione)
-                VALUE ('".$nome."', '".$cognome."', '".$documento."', ".$bambino.", ".$idPrenotazione.");";
->>>>>>> 8243b86b83b39f2a2e2660b565470b356afc331c
         
         $stmt = $con->query($queryText);
 		//echo $queryText; 
@@ -48,11 +38,6 @@
 		//echo '</div>';
 	}
 
-<<<<<<< HEAD
-=======
-	/*
-    //include('./loadTicketsUtil.php');
->>>>>>> 8243b86b83b39f2a2e2660b565470b356afc331c
     function loadTickets($con){
 		$queryText = "select * from passeggero P
 					where P.prenotazione = " . $idPrenotazione .";";
@@ -73,7 +58,7 @@
 			}
 		}
 	}
-	*/
+
 ?>   
 
 

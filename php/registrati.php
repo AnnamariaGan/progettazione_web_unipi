@@ -34,24 +34,4 @@
 
     $con->close();
 ?>
-
-<!DOCTYPE html>
-<html lang = "it">
-	<head>
-		<meta charset="utf-8">
-		<meta name = "author" content = "progetto">
-		<meta name = "keywords" content = "sito">
-		<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" /> 
-		<!-- inserire il css account.css di account se necessario.
-		 ogni sottocodice ha il suo css ma non lo rpende in questo caso-->
-		<title>registrati</title>
-	</head>
-	
-	<body>
-        <a href="/gandolfo/index.php"><img src="/gandolfo/images/logo.png" 
-             alt="Logo 7Wings" width="400" height="150"></a> 
-	
-    
-    </body>
-
-</html>
+ 

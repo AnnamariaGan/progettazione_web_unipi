@@ -112,7 +112,7 @@
 		<meta name = "author" content = "progetto">
 		<meta name = "keywords" content = "sito">
 		<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" /> 
-		<link href="./../css/voli.css" rel="stylesheet" type="text/css">
+		<link href="/gandolfo/css/profilo.css" rel="stylesheet" type="text/css">
 	
 		<title>profilo</title>
 	</head>
@@ -121,7 +121,7 @@
 		<section id = "intestazione">
 			<div id ="header_wrapper" style = "text-align:center">
 				<a href="./gandolfo/index.php"><img src="/gandolfo/images/logo.png" 
-					alt="Logo 7Wings" width="420" height="187"> </a>
+					alt="Logo 7Wings" max-width="auto" max-height="auto"> </a>
 			</div>
 			<?php
 				include('./layout/intestazione.php'); 
@@ -139,9 +139,11 @@
 				//caricare dal db i viaggi di tizio loggato in una tabella
 			?>
 		</section>  -->
-
+		<br>
+		<hr  noshade>
+		<br>
 		<section id = "check">
-			<h1>Effettua il check-in 2 giorni prima di partire.</h1>
+			<h1>Effettua il check-in prima di partire.</h1>
 			<p>Puoi anche aggiungere ulteriori bagagli con un sovraprezzo di 10 euro. </p>
 			
 			<?php
@@ -150,22 +152,21 @@
 			?>  
 		  
         </section>
-			
-		<section id="logoutSection"> 
+		<br>
+		<hr noshade>
+		<br>
 		
+		<section id="logoutSection"> 
 			<form action='./logout.php' id='logout'>
-				<button type="submit">ESCI</button>
+				<button class = "butoon" type="submit" >ESCI</button>
 			</form>
 		</section>
-		
+		<br>
+				<hr  noshade>
+			<br>
         <footer id="sign_in_footer">
-			<div id = "metodipagamento">
-				<?php
-					include('./layout/metodoPagamento.php');
-				?> 
-			</div>
-			
 			<div class="legal_form">
+			
 				<?php
 					include('./layout/footer.php');
 				?>  

@@ -6,8 +6,8 @@
 	echo'
 	<header class="bar_header">
 			<div id ="header_wrapper" style = "text-align:center">
-				<a href="./gandolfo/index.php"><img src="/gandolfo/images/logo.png" 
-					alt="Logo 7Wings" width="420" height="187"> </a>
+				<a href="/gandolfo/index.php"><img src="/gandolfo/images/logo.png" 
+					alt="Logo 7Wings"max-width="auto" min-height="auto"> </a>
 			</div>
 	</header>
 	';
@@ -320,8 +320,6 @@
 		<meta name = "author" content = "progetto">
 		<meta name = "keywords" content = "sito">
 		<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" /> 
-		<!-- voli.css da aggiustare nel caso-->
-		<!-- css grid , questo non ricordo a cosa si riferisce--> 
 		<link href="./../css/voli.css" rel="stylesheet" type="text/css">
 		<title>voli</title>
 		
@@ -342,8 +340,11 @@
 			<p>
 				Ricorda: puoi portare con te solo una borsa piccola e un trolley.
 				Eventuali altre valige puoi aggiurngerle al momento del Check In con 
-				un sovraprezzo di €10,00 per ogni valigia o trolley per un massimo di 15 kg.
+				un sovraprezzo di €10,00 per ogni valigia o trolley.
 			</p>
+			<br>
+				<hr  noshade>
+			<br>
         </section>
 		
         <footer id="sign_in_footer">
@@ -353,7 +354,9 @@
 					include('./layout/metodoPagamento.php');
 				?> 
 			</div>
-			
+			<br>
+				<hr  noshade>
+			<br>
 			<div class="legal_form">
 				<?php
 					include('./layout/footer.php');

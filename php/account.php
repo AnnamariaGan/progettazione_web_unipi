@@ -27,9 +27,7 @@ include DIR_UTIL . "sessionUtil.php";
 		<meta name = "author" content = "progetto">
 		<meta name = "keywords" content = "sito">
 		<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" /> 
-		<!-- inserire il css account.css di account se necessario.
-		 ogni sottocodice ha il suo css ma non lo rpende in questo caso-->
-	<!--	<script src="/gandolfo/js/registrati.js"></script> -->
+		<link href="/gandolfo/css/account.css" rel="stylesheet" type="text/css">
 		<script src="/gandolfo/js/valida.js"></script>
 		<title>account</title>
 	</head>
@@ -37,14 +35,20 @@ include DIR_UTIL . "sessionUtil.php";
 	<body>
 		
 		<section id = "intestazione">
+		<div id ="header_wrapper" style = "text-align:center">
+				<img src="/gandolfo/images/logo.png" alt="Logo 7Wings" max-width="auto" max-height="auto"> 
+			</div>
 			<?php
 				include("./layout/intestazione.php"); 
 			?>  
 		</section>
 
-		<h1> il mio account </h1>
 		
+		<br>
+		<hr  noshade>
+		<br>
 		<section id = "accedi">
+			<h1>ACCEDI</h1>
 			<form name = "profilo" action="./login.php" method = "post">
 				<div>
 					<label for="mail"><b>Email</b></label>
@@ -68,8 +72,11 @@ include DIR_UTIL . "sessionUtil.php";
 				</div>
 			</form>
 		</section>
-		
+		<br>
+		<hr noshade>
+		<br>
         <section id = "registrati">
+			<h1>REGISTRATI</h1>
             <form name = "registrati" action="./registrati.php" method = "post"  onChange="onChangeMail();">
 				<div>
 					<label for="nome"><b>Nome</b></label>
@@ -97,14 +104,10 @@ include DIR_UTIL . "sessionUtil.php";
 				</div>
             </form>
         </section>
-		
+		<br>
+		<hr  noshade>
+		<br>
 		<footer id="sign_in_footer">
-			
-			<div id = "metodipagamento">
-				<?php
-					include('./layout/metodoPagamento.php');
-				?> 
-			</div>
 			
 			<div class="legal_form">
 				<?php

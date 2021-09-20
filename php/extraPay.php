@@ -16,6 +16,8 @@
 		    exit;
     }	
 ?>
+
+
 <!DOCTYPE html>
 <html lang="it">
 	<head>
@@ -23,39 +25,63 @@
 		<meta name = "author" content = "Annamaria Gandolfo">
 		<meta name = "keywords" content = "Manuale utente">
 		<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" /> 
-		 <link rel = "stylesheet" href = "/gandolfo/css/pagamento.css">
-         <script src="./js/ajax/pagamento.js"></script>  <!-- rivedi percorso: non funziona -->
+	
+        <link href="/gandolfo/css/voli.css" rel="stylesheet" type="text/css">
+
+        <script src="/gandolfo/js/pagamento.js"></script> 
+
 		<title> 7 wings pagamento</title>
 	</head>
 	<body>
-        <a href="/gandolfo/index.php"><img src="/gandolfo/images/logo.png" alt="Logo 7Wings" width="400" height="150"> </a>
+     <!--  <script src="/gandolfo/js/pagamento.js"></script>  -->
+       
+    <a href="/gandolfo/index.php"><img src="/gandolfo/images/logo.png" alt="Logo 7Wings" max-width="auto" max-height="auto"> </a>
 	
 		<section id = "pagamento">
-                <form id = "pay">
-                    <label for="name">Nome e Cognome</label>
-                    <input id="name" maxlength="40" type="text"></br>
+            
+            
+            <img id = "pay" class="img-responsive cc-img" src="/gandolfo/images/logopay.png" width="300" height="100">
+            <h3 class="text-center">Paga con conto PayPal</h3>
+            <form id = "pagaPaypal" action = "./prenotazione.php" method = "post" onSubmit= "pagaPaypal();">
+                <p>Clicca qui se vuoi pagare con PayPal</p>
+                <button onclick ="pagaPaypal()">PAY PAL</button>
+            </form>
 
-                    <label for="cardnumber">Numero carta di credito</label>
-                    <input id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric"></br>
+            <br>
+            <br>
+		        <hr noshade>
+		    <br>
 
-                    <label for="expirationdate">Scadenza (mm/yy)</label>
-                    <input id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric"></br>
+            <form id = "pay" action="./prenotazione.php" method = "post" onSubmit="paga();">
+            <h3 class="text-center">Paga con carta di credito</h3>
+                <label for="name">Nome e Cognome</label>
+                <input id="name" maxlength="40" type="text"></br>
 
-                    <label for="securitycode">CVV</label>
-                     <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric"></br>
-                </form>
-               
-                <div class="panel-footer">
-                    <!-- aggiungere al bottone pagamento un alert: PAGAMENTO EFFETTUATO CON SUCCESSO , valige prenotate-->
-                    <button class="btn btn-warning btn-lg btn-block" >Paga adesso</button>
-                    <?php
+                <label for="cardnumber">Numero carta di credito</label>
+                <input id="cardnumber" type="text" pattern="[0-9]{8}" inputmode="numeric"></br>
 
-                    ?>
-                    
-                </div>
+                <label for="expirationdate">Scadenza (mm/yy)</label>    <!-- problemi con la data -->
+                <input id="expirationdate" type="text" pattern="[0-9]{2}[/][0-9]{2}" inputmode="numeric"></br>
+
+                <label for="securitycode">CVV</label>
+                <input id="securitycode" type="password" pattern="[0-9]*" inputmode="numeric"></br>
+                <br>
+                <input type="submit" value="Paga adesso">
+            </form>
         </section>
 
+        <section>
+            <br>
+                <hr  noshade>
+            <br>
+            <p>Ricordati di inserire un etichetta nella tua valigia per non perderla in aereporto.</p>
+            <h3>Cliccando su paga adesso accetti i nostri termini e condizioni.</h3>
+        </section>
+        
         <footer>
+        <br>
+		    <hr noshade>
+		<br>
             <?php
 				include('./layout/footer.php');
 			?>

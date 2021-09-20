@@ -23,11 +23,8 @@
 	</head>
 	
 	<body>  
+	<a href="/gandolfo/index.php"><img id = "logo" src="/gandolfo/images/logo.png" alt="Logo 7Wings"> </a>
 		<section id = "intestazione"> 
-			<div id ="header_wrapper" style = "text-align:center">
-				<img src="/gandolfo/images/logo.png" alt="Logo 7Wings" width="420" height="187"> 
-			</div>
-
 			<?php
 				include('./php/layout/intestazione.php');   
 			?>
@@ -86,6 +83,10 @@
 			</form>
 		</section>
 		
+		<br>
+		<hr  noshade>
+		<br>
+
 		<section> 
 			<div class = "carosello">
 				<?php
@@ -95,21 +96,23 @@
 			</div>
 		</section>
 		
-		<footer id="sign_in_footer">
-			
-			<div id = "metodipagamento">
+		<div id = "metodipagamento">
 				<?php
 					include('./php/layout/metodoPagamento.php');
 				?>
-			</div>
-			
-			
-			<div class="legal_form">
+		</div>
+		
+		<br>
+			<hr  noshade>
+		<br>
+		
+		<div class="legal_form">
 				<?php
 					include('./php/layout/footer.php');
 				?>
-			</div>
-		</footer>
+		</div>
+		
+	
 		
 		<script src="./js/ajax/rotta.js"></script>  
 		<script src="./js/controlli.js"></script> 
