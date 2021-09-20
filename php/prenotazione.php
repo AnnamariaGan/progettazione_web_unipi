@@ -20,7 +20,7 @@
     }
 
     $username = $_SESSION['mail'];
-    //echo $username;
+   
     
     $numero = 0;
     if (isset($_COOKIE['numero']) ) {
@@ -42,7 +42,7 @@
 
     echo $numero . '\n';
     */
-    if (isset($_COOKIE['andataDiv']) ) {
+   
         $andate = $_COOKIE['andataDiv'];
         if (is_array($andate)) {
             foreach ($andate as $key => $andata) {
@@ -118,10 +118,7 @@
             $stm = $con->query($queryText);
          
         }
-        //$stmt = $con->query($queryText);
-        */
-    //}
-    /*
+
     if (isset($_COOKIE['ritornoDiv']) ){
         $ritorni = $_COOKIE['ritornoDiv'];
         if (is_array($ritorni)) {
@@ -144,25 +141,10 @@
         //$stmt = $con->query($queryText);
     }    */
 
-   /*
-    if ($errorMessage === null) {
-        echo "<script>
-        alert('Pagamento effettuato con successo!');
-        </script>";
-        //header('location: ./profilo.php');
-    } else {
-        alert('Qualcosa è andato storto. Ci dispiace, si prega di riprovare.');
-        //header('location: ./../index.php?errorMessage=' . $errorMessage );
-        //header('location: /gandolfo/index.php');
-        
-        exit;
-    }*/
     $con->close();
     unset($_COOKIE['andataDiv']);
     unset($_COOKIE['ritornoDiv']);
     unset($_COOKIE['numero']);
-    /*echo "<script>
-    alert('Pagamento effettuato con successo!');
-    </script>";*/
+   
     header('location: /gandolfo/index.php');
 ?>

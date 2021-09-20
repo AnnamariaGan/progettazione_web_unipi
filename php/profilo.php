@@ -8,7 +8,7 @@
 
 	session_start();
 	require_once __DIR__ . "/util/config.php";
-	require_once DIR_UTIL . "sessionUtil.php"; //includes session login
+	require_once DIR_UTIL . "sessionUtil.php"; 
 
 	if (!isLogged()){
 		header('Location: ./account.php'); 
@@ -16,29 +16,11 @@
 		exit;
 	}
 
-	/*
-	// N.B.: gia` definita in /config.php
-	function alert($msg) {
-		echo '<script type="text/javascript">
-			alert("'.$msg.'");
-			window.location = "/gandolfo/index.php";
-		</script>';
-	}
-	*/
-	/*
-	//UNUSED
-	//to do: remove
-	function redirect($url, $statusCode = 303) {
-   		header('Location: ' . $url, true, $statusCode);
-   		die();
-	}
-	*/
 	function prenotatiUtil(){
-		$dbHostname = "localhost";  //per il db
+		$dbHostname = "localhost";  
 		$dbUsername = "root";
 		$dbPassword = "";
 		$dbName = "wings";
-		//connessione al db
 		$con = mysqli_connect($dbHostname, $dbUsername, $dbPassword, $dbName);
 		if(mysqli_connect_errno()){
 			exit('Failed to connect to MySQL: ' . mysqli_connect_error());
@@ -131,14 +113,17 @@
 		<meta name = "author" content = "progetto">
 		<meta name = "keywords" content = "sito">
 		<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" /> 
-		<link href="./../css/voli.css" rel="stylesheet" type="text/css">
-		
+		<link href="/gandolfo/css/profilo.css" rel="stylesheet" type="text/css">
+	
 		<title>profilo</title>
 	</head>
 	
 	<body>
-		<!-- riferimento a login.php nel caso in cui non sia stato fatto il login -->
 		<section id = "intestazione">
+			<div id ="header_wrapper" style = "text-align:center">
+				<a href="./gandolfo/index.php"><img src="/gandolfo/images/logo.png" 
+					alt="Logo 7Wings" max-width="auto" max-height="auto"> </a>
+			</div>
 			<?php
 				include('./layout/intestazione.php'); 
 			?>  
@@ -155,45 +140,40 @@
 				//caricare dal db i viaggi di tizio loggato in una tabella
 			?>
 		</section>  -->
-
+		<br>
+		<hr  noshade>
+		<br>
 		<section id = "check">
-			<h1>Effettua il check-in 2 giorni prima di partire.</h1>
+			<h1>Effettua il check-in prima di partire.</h1>
 			<p>Puoi anche aggiungere ulteriori bagagli con un sovraprezzo di 10 euro. </p>
 			
 			<?php
 				include('./checkin.php'); 
 				prenotatiUtil();
 			?>  
-
-		   <!-- button type="submit">Check-In</button-->
-		   <!-- aggiorna db -->
-			 <!-- dopo aver effettuato il check in devo stampare il biglietto-->
-
+		  
         </section>
-			
+		<br>
+		<hr noshade>
+		<br>
+		
 		<section id="logoutSection"> 
-		<!--	<p>Logout</p> -->
-
 			<form action='./logout.php' id='logout'>
-				<button type="submit">ESCI</button>
+				<button class = "butoon" type="submit" >ESCI</button>
 			</form>
 		</section>
-		
+		<br>
+				<hr  noshade>
+			<br>
         <footer id="sign_in_footer">
-			<div id = "metodipagamento">
-				<?php
-					include('./layout/metodoPagamento.php');
-				?> 
-			</div>
-			
 			<div class="legal_form">
+			
 				<?php
 					include('./layout/footer.php');
 				?>  
 			</div>
 		</footer>
 	</body>
-
 
 	<script src="../js/profilo.js"></script>	
 </html>

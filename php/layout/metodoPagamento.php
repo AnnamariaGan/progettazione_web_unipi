@@ -1,11 +1,11 @@
 <link href="./css/metodoPagamento.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<div class="flex-container">
+<div class="flex-container" align="center">
 		<div >
 			<h3>Metodi di pagamento</h3>
 			<!-- PayPal Logo -->
 			<!-- https://www.paypal.com/it/webapps/mpp/logo-center -->
-			<table border="0" cellpadding="10" cellspacing="0" align="left">
+			<table border="0" cellpadding="10" cellspacing="0" align="center">
 				<tbody>
 					<tr>
 						<td align="center"></td></tr><tr><td align="center">

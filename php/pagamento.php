@@ -49,29 +49,31 @@
 		<meta name = "author" content = "Annamaria Gandolfo">
 		<meta name = "keywords" content = "Manuale utente">
 		<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" /> 
-		<link rel = "stylesheet" href = "/gandolfo/css/pagamento.css">
+	
+        <link href="/gandolfo/css/voli.css" rel="stylesheet" type="text/css">
+
         <script src="/gandolfo/js/pagamento.js"></script> 
 
 		<title> 7 wings pagamento</title>
 	</head>
 	<body>
-     <!--  <script src="/gandolfo/js/pagamento.js"></script>  -->
-       
-    <a href="/gandolfo/index.php"><img src="/gandolfo/images/logo.png" alt="Logo 7Wings" width="400" height="150"> </a>
+    <a href="/gandolfo/index.php"><img src="/gandolfo/images/logo.png" alt="Logo 7Wings" max-width="auto" max-height="auto"> </a>
 	
 		<section id = "pagamento">
-            
-            <h3 class="text-center">Paga il tuo volo</h3>
-            <img id = "pay" class="img-responsive cc-img" src="/gandolfo/images/logopay.png">
-
+            <img id = "pay" class="img-responsive cc-img" src="/gandolfo/images/logopay.png" width="300" height="100">
+            <h3 class="text-center">Paga con conto PayPal</h3>
             <form id = "pagaPaypal" action = "./prenotazione.php" method = "post" onSubmit= "pagaPaypal();">
                 <p>Clicca qui se vuoi pagare con PayPal</p>
                 <button onclick ="pagaPaypal()">PAY PAL</button>
             </form>
 
             <br>
-            
+            <br>
+		        <hr  noshade>
+		    <br>
+
             <form id = "pay" action="./prenotazione.php" method = "post" onSubmit="paga();">
+            <h3 class="text-center">Paga con carta di credito</h3>
                 <label for="name">Nome e Cognome</label>
                 <input id="name" maxlength="40" type="text"></br>
 
@@ -83,20 +85,24 @@
 
                 <label for="securitycode">CVV</label>
                 <input id="securitycode" type="password" pattern="[0-9]*" inputmode="numeric"></br>
-                
+                <br>
                 <input type="submit" value="Paga adesso">
             </form>
         </section>
 
         <section>
+            <br>
+                <hr  noshade>
+            <br>
             <h2>IMPORTANTE</h2>
             <p> Ricordati di effettuare il Check 2 gioni prima del viaggio.  </p>
-            <p>Effetuando il Check in sarei in posseso del vero biglietto che ti 
-                permetter&a di viaggiare. </p>
-            <h3>Cliccando su paga adesso accettati i nostri termini e condizioni.</h3>
+            <h3>Cliccando su paga adesso accetti i nostri termini e condizioni.</h3>
         </section>
         
         <footer>
+        <br>
+		    <hr  noshade>
+		<br>
             <?php
 				include('./layout/footer.php');
 			?>

@@ -1,16 +1,14 @@
 <?php
-    $dbHostname = "localhost";  //per il db
+    $dbHostname = "localhost"; 
 	$dbUsername = "root";
 	$dbPassword = "";
 	$dbName = "wings";
 
-	//connessione al db
 	$con = mysqli_connect($dbHostname, $dbUsername, $dbPassword, $dbName);
 	if(mysqli_connect_errno()){
 		exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 	}
 
-    //recupero quello che ho scritto
     $nome = $_POST['Nome'];
     $cognome = $_POST['Cognome'];
 	$documento = $_POST['Documento'];
@@ -22,9 +20,9 @@
 	$idPrenotazione = $_POST['numeroPrenotazione'];
 	
 	if (isset($nome, $cognome, $documento, $bambino) ) {
-        //query di insert
-        $queryText = " INSERT INTO passeggero (Nome, Cognome, Documento, bambino, prenotazione)
-                VALUE ('".$nome."', '".$cognome."', '".$documento."', ".$bambino.", ".$idPrenotazione.");";
+      
+        $queryText = " INSERT INTO passeggero (Nome, Cognome, Documento, bambino)
+                VALUES('".$nome."', '".$cognome."', '".$documento."', '".$bambino."');";
         
         $stmt = $con->query($queryText);
 		//echo $queryText; 
@@ -49,10 +47,7 @@
 		$stmt2 = $con->query($query2);
 	}
 
-	/*
-    //include('./loadTicketsUtil.php');
     function loadTickets($con){
-		//recupero i biglietti gia` cheked in
 		$queryText = "select * from passeggero P
 					where P.prenotazione = " . $idPrenotazione .";";
 		
@@ -72,7 +67,7 @@
 			}
 		}
 	}
-	*/
+
 ?>   
 
 

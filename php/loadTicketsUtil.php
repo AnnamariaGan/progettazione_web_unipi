@@ -1,6 +1,5 @@
 <?php
 	function loadTickets($con){
-		//recupero i biglietti gia` cheked in
 		$queryText = "select * from passeggero P
 					where P.prenotazione = " . $_POST['idPrenotazione'] .";";
 		
