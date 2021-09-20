@@ -20,24 +20,32 @@
         echo "sì";
     }*/
     if (isset($_POST['andataDiv']) ) {
-        $i = 0;
-        foreach ($_POST['andataDiv'] as $current) {
-            if (isset($current) ) {
-                setcookie('andataDiv['.$i.']', $current);
-            }
+        if(is_array($_POST['andataDiv'])) {
+            $i = 0;
+            foreach ($_POST['andataDiv'] as $current) {
+                if (isset($current) ) {
+                    setcookie('andataDiv['.$i.']', $current);
+                }
 
-            $i += 1;
+                $i += 1;
+            }
+        } else {
+            setcookie('andataDiv', $_POST['andataDiv']);
         }
     }
     //echo $_POST['ritornoDiv'];
     if (isset($_POST['ritornoDiv']) ) {
-        $i = 0;
-        foreach ($_POST['ritornoDiv'] as $current) {
-            if (isset($current) ) {
-                setcookie('ritornoDiv['.$i.']', $current);
+        if(is_array($_POST['andataDiv'])) {
+            $i = 0;
+            foreach ($_POST['ritornoDiv'] as $current) {
+                if (isset($current) ) {
+                    setcookie('ritornoDiv['.$i.']', $current);
+                }
+                
+                $i += 1;
             }
-            
-            $i += 1;
+        } else {
+            setcookie('ritornoDiv', $_POST['ritornoDiv']);
         }
     }
     
