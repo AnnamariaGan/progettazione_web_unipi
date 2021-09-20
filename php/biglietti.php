@@ -32,9 +32,9 @@
 				inner join volo V on V.idVolo = P.volo
 				inner join rotta R on V.Rotta = R.idRotta
 				where P.id = " . $_POST['idPrenotazione'] .";";
-	
+	echo $queryText;
 	$result = $con->query($queryText);
-	
+	//echo $result;
 	if(mysqli_num_rows($result)==0){
 		echo 'Errore, qualcosa è andato storto, riprovare o contattare l\'assistenza.';
 	} else {
@@ -67,7 +67,11 @@
 				echo '  ';
 				echo $row['Documento'];
 				echo '  ';
-				echo $row['Bambino'];
+				if ($row['bambino'] == 1) {
+					echo 'bambino';
+				} else {
+					echo 'adulto';
+				}
 				echo '
 				';
 			}
@@ -131,15 +135,19 @@
 				<?php 
 					loadTickets($con);
 				?>
-				<div id="checkedTickets" hidden>0</div>
 			</div>
 		</div>
 
-		<div id="totalRequested" hidden>
-			<?php
-				echo ($adulti + $bambini);
-			?>
-		</div>
+
+		
+		<?php
+			echo '<input id="totalRequested" type="number" value="';
+			echo ($adulti + $bambini);
+			echo '" hidden>';
+		?>
+	
+		<input id="checkedTickets" type="number" value='0' hidden>
+			
 
 		<!-- div id="ticketList"-->
 		
@@ -150,6 +158,56 @@
 	<script src="../js/biglietti.js"></script>
 
 	
+<?php 
+	$tot = $adulti + $bambini;
+	for ($i = 0; $i< $tot; $i++) {
+		
+		echo '
+		<script>
+		window.addEventListener( "load", function () {
+		function sendData() {
+			const XHR = new XMLHttpRequest();
+
+			// Bind the FormData object and the form element
+			const FD = new FormData( form'.$i.' );
+
+			// Define what happens on successful data submission
+			XHR.addEventListener( "load", function(event) {
+
+				form'.$i.'.remove();
+
+				let loadTickets = document.createElement("div");
+				let txt = document.createTextNode(event.target.responseText);
+				loadTickets.appendChild(txt);
+				document.getElementById( "loadTicketsContainer").appendChild(loadTickets);
+			} );
+
+			// Define what happens in case of error
+			XHR.addEventListener( "error", function( event ) {
+			alert( "Oops! Something went wrong." );
+			} );
+
+			// Set up our request
+			XHR.open( "POST", "./checkindbutil.php" );
+
+			// The data sent is what the user provided in the form
+			XHR.send( FD );
+		}
+
+		// Access the form element...
+		const form'.$i.'= document.getElementById( "passeggero-'.$i.'" );
+
+		// ...and take over its submit event.
+		form'.$i.'.addEventListener( "submit", function ( event ) {
+			event.preventDefault();
+
+			sendData();
+		} );
+		} );
+		</script>';
+		
+	}
+?>
 	<?php
 		$con->close();
 	?>
