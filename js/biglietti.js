@@ -3,6 +3,8 @@ function insertPasseggero(num, tipoBambino){
     newForm.setAttribute("method", "post");
     newForm.setAttribute("id", "passeggero-".concat(num));
 
+    //rimuovi
+    newForm.setAttribute("action", "./checkindbutil.php");
 
     let nome = document.createElement("input");
     nome.setAttribute("type", "text");
@@ -24,13 +26,14 @@ function insertPasseggero(num, tipoBambino){
     documento.setAttribute("type", "text");
     documento.setAttribute("name", "Documento");
     documento.setAttribute("value", "");
+    documento.setAttribute("pattern", "[A-Za-z0-9]{9}")
 
     newForm.appendChild(documento);
 
 
     let tipoBambinoDiv = document.createElement("input");
     tipoBambinoDiv.setAttribute("type", "text");
-    tipoBambinoDiv.setAttribute("nome", "tipoBambino");
+    tipoBambinoDiv.setAttribute("name", "tipoBambino");
     tipoBambinoDiv.setAttribute("readonly", true);
     
     if (tipoBambino != "bambino") {
@@ -43,10 +46,10 @@ function insertPasseggero(num, tipoBambino){
 
     let prenotazioneInput = document.createElement("input");
     prenotazioneInput.setAttribute("type", "number");
-    prenotazioneInput.setAttribute("nome", "numeroPrenotazione");
+    prenotazioneInput.setAttribute("name", "numeroPrenotazione");
     prenotazioneInput.setAttribute("readonly", true);
     prenotazioneInput.hidden = true;
-    const numPrenotazione = document.getElementById("totalRequested").innerHTML;
+    const numPrenotazione = document.getElementById("idPrenotazioneDiv").innerHTML;
     prenotazioneInput.setAttribute("value", numPrenotazione);
 
     newForm.appendChild(prenotazioneInput);
@@ -64,14 +67,15 @@ function insertPasseggero(num, tipoBambino){
 
 
 function firstLoadPasseggeri(){
-    let tot = document.getElementById('totalRequested').innerHTML;
-    console.log(tot);
-    tot -= document.getElementById('checkedTickets').innerHTML;
-    console.log(tot);
+    let tot = document.getElementById('totalRequested').value;
+    //console.log(tot);
+    tot -= document.getElementById('checkedTickets').value;
+    //console.log(tot);
     if (tot < 0) {
         alert("An unexpected error occurred");
+        console.log("totalRequested tickets are less than checkedTickets o_O .");
     }
 //>>>>>>>>>>>>>>>>>>>>>TO DO CHANGE THIS
     for(let i = 0; i < tot; i++ )
-        insertPasseggero(i,"adulti");
+        insertPasseggero(i,"adulto");
 }

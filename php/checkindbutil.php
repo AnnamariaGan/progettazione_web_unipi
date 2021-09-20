@@ -10,25 +10,42 @@
 		exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 	}
 
-    //recupero quello che ho scirtto
+    //recupero quello che ho scritto
     $nome = $_POST['Nome'];
     $cognome = $_POST['Cognome'];
 	$documento = $_POST['Documento'];
-    $bambino = $_POST['tipoBambino'];
-
+	$bambino = 0;
+	if ($_POST['tipoBambino'] == 'bambino') {
+		$bambino = 1;
+	}
+    
+	$idPrenotazione = $_POST['numeroPrenotazione'];
+	
 	if (isset($nome, $cognome, $documento, $bambino) ) {
         //query di insert
-        $queryText = " INSERT INTO passeggero (Nome, Cognome, Documento, bambino)
-                VALUES('".$nome."', '".$cognome."', '".$documento."', '".$bambino."');";
+        $queryText = " INSERT INTO passeggero (Nome, Cognome, Documento, bambino, prenotazione)
+                VALUE ('".$nome."', '".$cognome."', '".$documento."', ".$bambino.", ".$idPrenotazione.");";
         
-        $stmt = $con->query($queryText);   
+        $stmt = $con->query($queryText);
+		//echo $queryText; 
+//<<<<<<<<<< TO DO:
+		//echo '<div id="loadedTickets">';
+		 
+		echo $nome.' '.$cognome.' '.$documento.' ';
+		if ($bambino == 1) {
+			echo 'bambino';
+		} else {
+			echo 'adulto';
+		}
+		//echo '</div>';
 	}
 
+	/*
     //include('./loadTicketsUtil.php');
     function loadTickets($con){
 		//recupero i biglietti gia` cheked in
 		$queryText = "select * from passeggero P
-					where P.prenotazione = " . $_POST['idPrenotazione'] .";";
+					where P.prenotazione = " . $idPrenotazione .";";
 		
 		$result = $con->query($queryText);
 		
@@ -46,13 +63,10 @@
 			}
 		}
 	}
+	*/
 ?>   
 
-<div id="loadedTickets">
-    <?php 
-        loadTickets($con);
-    ?>
-</div>
+
 
 <?php
     $con->close();
