@@ -178,7 +178,7 @@
 		echo '
 		<script>
 
-		if(document.getElementById( "passeggero-'.$i.'" ) != null ) {
+		
 			window.addEventListener( "load", function () {
 			function sendData() {
 				
@@ -188,6 +188,7 @@
 				const FD = new FormData( form'.$i.' );
 
 				// Define what happens on successful data submission
+				
 				XHR.addEventListener( "load", function(event) {
 
 					form'.$i.'.remove();
@@ -195,8 +196,13 @@
 					let loadTickets = document.createElement("div");
 					let txt = document.createTextNode(event.target.responseText);
 					loadTickets.appendChild(txt);
-					document.getElementById("loadTicketsContainer").appendChild(loadTickets);
-					
+					/*if (document.getElementById("loadTicketsContainer") != null
+					 && loadTickets != null)*/ try {
+						let u = document.getElementById("loadTicketsContainer"); 
+						u.appendChild(loadTickets);
+					} catch(error) {
+						console.log("codice 000");
+					}
 					const tipo = document.getElementById("tipoPasseggero-'.$i.'").value;
 					if (tipo == "adulto") {
 						let chkdAdults = parseInt(document.getElementById("checkedAdults").value) + 1;
@@ -207,6 +213,7 @@
 					}
 
 				} );
+				
 
 				// Define what happens in case of error
 				XHR.addEventListener( "error", function( event ) {
@@ -223,15 +230,17 @@
 				// Access the form element...
 				const form'.$i.'= document.getElementById( "passeggero-'.$i.'" );
 
+				if(document.getElementById( "passeggero-'.$i.'" ) != null ) 
+		{
 				// ...and take over its submit event.
 				form'.$i.'.addEventListener( "submit", function ( event ) {
 					event.preventDefault();
 
 					sendData();
 				} );
-			
+			}
 				} );
-		}
+		
 		
 		</script>';
 		
