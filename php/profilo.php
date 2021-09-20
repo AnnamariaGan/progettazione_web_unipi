@@ -47,8 +47,9 @@
 					inner join rotta R on V.Rotta = R.idRotta 
 					inner join prenotazioni P on V.idvolo = P.volo
 					where P.utente = '".$_SESSION['mail']."'
-					order by P.`check`, V.data DESC;" ;
-						
+						AND P.`check` < P.`postiPrenotati`
+					order by V.`Data` DESC, V.`Ora` DESC, P.`check` DESC;" ;
+		echo $queryText;				
 		$result = $con->query($queryText);
 		
 		if(mysqli_num_rows($result)==0){

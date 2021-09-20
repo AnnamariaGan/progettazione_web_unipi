@@ -13,11 +13,13 @@
 			exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 		}
 		$utente = $_SESSION['mail'];
+		
 		$queryText = "select * from prenotazioni P 
 					inner join volo V on V.idVolo = P.volo
 					inner join rotta R on V.Rotta = R.idRotta
 					where P.utente = '$utente' 
-						and P.check = 'false';" ;
+						and P.`check` >= P.`postiPrenotati`
+					order by V.`Data` DESC, V.`Ora` DESC, P.`check` DESC;" ;
 			
 		$result = $con->query($queryText);
 		
@@ -32,9 +34,11 @@
 
 				echo '<div class="grid-row">';
 
+				/*
 				echo '<div class="grid-item">';
 				echo 'rotta';
 				echo '</div>';
+				*/
 
 				echo '<div class="grid-item">';
 				echo 'Partenza';
@@ -53,7 +57,7 @@
 				echo '</div>';
 
 				echo '<div class="grid-item">';
-				echo 'Posti prenotati';
+				echo 'Check in';
 				echo '</div>';
 				
 				echo '</div>';
@@ -61,7 +65,7 @@
 				while ($row = $result->fetch_assoc() ) {
 					//da aggiustare
 					echo '<div class="grid-row" onclick="rowClick(';
-					echo $row['idVolo'].');" id="row-'.$row['idVolo'].'">';
+					echo $row['id'].');" id="row-'.$row['id'].'">';
 
 					echo '<div class="grid-item">';
 					echo $row['Partenza'];
@@ -75,12 +79,12 @@
 					echo $row['Data'];
 					echo '</div>';
 				
-					echo '<div class="grid-item" id="pA-'.$row['idVolo'].'">';
+					echo '<div class="grid-item" id="pA-'.$row['id'].'">';
 					echo $row['Ora'];
 					echo '</div>';
 				
 					echo '<div class="grid-item">';
-					echo $postiLiberi;
+					echo 'Check in ok, clicca per i biglietti';
 					echo '</div>';
 
 					echo '</div>';
