@@ -1,3 +1,6 @@
+<a href="/gandolfo/index.php"><img id = "logo" src="/gandolfo/images/logo.png" alt="Logo 7Wings"> </a>
+<br>
+	
 <?php
 	require_once __DIR__ . "/util/config.php";
 	

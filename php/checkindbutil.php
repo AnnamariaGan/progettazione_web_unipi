@@ -21,10 +21,12 @@
 	
 	if (isset($nome, $cognome, $documento, $bambino) ) {
       
-        $queryText = " INSERT INTO passeggero (Nome, Cognome, Documento, bambino)
-                VALUES('".$nome."', '".$cognome."', '".$documento."', '".$bambino."');";
+        $queryText = " INSERT INTO passeggero (Nome, Cognome, Documento, bambino, prenotazione)
+                VALUES('".$nome."', '".$cognome."', '".$documento."', ".$bambino.", ".$idPrenotazione.");";
         
         $stmt = $con->query($queryText);
+
+
 		//echo $queryText; 
 //<<<<<<<<<< TO DO:
 		//echo '<div id="loadedTickets">';

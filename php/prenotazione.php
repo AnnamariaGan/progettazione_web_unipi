@@ -92,7 +92,7 @@
                 WHERE idVolo = ".$ritorno.";";
             $stm = $con->query($queryText);
         }
-    }
+    
         /*
         $queryText = '';
         if (is_array($andate)) {

@@ -9,6 +9,7 @@
 	require_once __DIR__ . "/util/config.php"; 
 	session_start();
     include DIR_UTIL . "sessionUtil.php";
+	echo '<a href="/gandolfo/index.php"><img id = "logo" src="/gandolfo/images/logo.png" alt="Logo 7Wings"> </a>';
 	include('./layout/intestazione.php'); 
 	
 	$dbHostname = "localhost"; 
@@ -33,7 +34,7 @@
 				inner join volo V on V.idVolo = P.volo
 				inner join rotta R on V.Rotta = R.idRotta
 				where P.id = " . $_POST['idPrenotazione'] .";";
-	echo $queryText;
+	
 	$result = $con->query($queryText);
 	//echo $result;
 	if(mysqli_num_rows($result)==0){
@@ -63,10 +64,13 @@
 		
 		if(mysqli_num_rows($result) > 0) {
 			while ($row = $result->fetch_assoc() ) {
+				echo '<label>Nome:</label>';
 				echo $row['Nome'];
 				echo '  ';
+				echo '<label>Cognome:</label>';
 				echo $row['Cognome'];
 				echo '  ';
+				echo '<label>Documento:</label>';
 				echo $row['Documento'];
 				echo '  ';
 				if ($row['bambino'] == 1) {
@@ -97,7 +101,7 @@
 	</head>
 	
 	<body onload="firstLoadPasseggeri();">
-        <!-- devo creare il form dove inserire le credenziali delle persone
+	    <!-- devo creare il form dove inserire le credenziali delle persone
             e aggiungerle nel db 
 
             eventualmente far pagare i bagagli aggiuntivi
@@ -105,21 +109,6 @@
 
             mi serve la prenotazione per aggiungere i tizi al db
         -->
-		<div id = "adulti">
-			Adulti: 
-			<?php
-				echo $adulti;
-			?>
-		</div>
-			<?php
-				if ($bambini > 0) {
-					echo '<div id = "bambini">';
-					echo "bambini ";
-					echo $bambini;
-					echo '</div>';
-
-				}
-			?>
 		<div>
 			<?php 
 				echo $data;
@@ -141,6 +130,7 @@
 			</div>
 		</div>
 
+		
 
 		
 		<?php
@@ -187,56 +177,62 @@
 		
 		echo '
 		<script>
-		window.addEventListener( "load", function () {
-		function sendData() {
-			const XHR = new XMLHttpRequest();
 
-			// Bind the FormData object and the form element
-			const FD = new FormData( form'.$i.' );
-
-			// Define what happens on successful data submission
-			XHR.addEventListener( "load", function(event) {
-
-				form'.$i.'.remove();
-
-				let loadTickets = document.createElement("div");
-				let txt = document.createTextNode(event.target.responseText);
-				loadTickets.appendChild(txt);
-				document.getElementById("loadTicketsContainer").appendChild(loadTickets);
+		if(document.getElementById( "passeggero-'.$i.'" ) != null ) {
+			window.addEventListener( "load", function () {
+			function sendData() {
 				
-				const tipo = document.getElementById("tipoPasseggero-'.$i.'").value;
-				if (tipo == "adulto") {
-					let chkdAdults = parseInt(document.getElementById("checkedAdults").value) + 1;
-					document.getElementById("checkedAdults").value = chkdAdults.toString();
-				} else {
-					let chkdChildren = parseInt(document.getElementById("checkedChildren").value) + 1;
-					document.getElementById("checkedChildren").value = chkdChildren.toString();
-				}
+				const XHR = new XMLHttpRequest();
 
-			} );
+				// Bind the FormData object and the form element
+				const FD = new FormData( form'.$i.' );
 
-			// Define what happens in case of error
-			XHR.addEventListener( "error", function( event ) {
-			alert( "Oops! Something went wrong." );
-			} );
+				// Define what happens on successful data submission
+				XHR.addEventListener( "load", function(event) {
 
-			// Set up our request
-			XHR.open( "POST", "./checkindbutil.php" );
+					form'.$i.'.remove();
 
-			// The data sent is what the user provided in the form
-			XHR.send( FD );
+					let loadTickets = document.createElement("div");
+					let txt = document.createTextNode(event.target.responseText);
+					loadTickets.appendChild(txt);
+					document.getElementById("loadTicketsContainer").appendChild(loadTickets);
+					
+					const tipo = document.getElementById("tipoPasseggero-'.$i.'").value;
+					if (tipo == "adulto") {
+						let chkdAdults = parseInt(document.getElementById("checkedAdults").value) + 1;
+						document.getElementById("checkedAdults").value = chkdAdults.toString();
+					} else {
+						let chkdChildren = parseInt(document.getElementById("checkedChildren").value) + 1;
+						document.getElementById("checkedChildren").value = chkdChildren.toString();
+					}
+
+				} );
+
+				// Define what happens in case of error
+				XHR.addEventListener( "error", function( event ) {
+				alert( "Oops! Something went wrong." );
+				} );
+
+				// Set up our request
+				XHR.open( "POST", "./checkindbutil.php" );
+
+				// The data sent is what the user provided in the form
+				XHR.send( FD );
+			}
+
+				// Access the form element...
+				const form'.$i.'= document.getElementById( "passeggero-'.$i.'" );
+
+				// ...and take over its submit event.
+				form'.$i.'.addEventListener( "submit", function ( event ) {
+					event.preventDefault();
+
+					sendData();
+				} );
+			
+				} );
 		}
-
-		// Access the form element...
-		const form'.$i.'= document.getElementById( "passeggero-'.$i.'" );
-
-		// ...and take over its submit event.
-		form'.$i.'.addEventListener( "submit", function ( event ) {
-			event.preventDefault();
-
-			sendData();
-		} );
-		} );
+		
 		</script>';
 		
 	}

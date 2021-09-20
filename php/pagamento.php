@@ -50,7 +50,7 @@
 		<meta name = "keywords" content = "Manuale utente">
 		<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" /> 
 	
-        <link href="/gandolfo/css/voli.css" rel="stylesheet" type="text/css">
+        <link href="/gandolfo/css/pagamento.css" rel="stylesheet" type="text/css">
 
         <script src="/gandolfo/js/pagamento.js"></script> 
 

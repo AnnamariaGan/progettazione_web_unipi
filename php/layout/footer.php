@@ -1,5 +1,5 @@
 <div>
-	<link rel = "stylesheet"  type = "text/css" href = "../../css/footer.css"> 
+	<link rel = "stylesheet"  type = "text/css" href = "/gandolfo/css/footer.css"> 
 	
 	<p id = "p1" >Copyright 2021 by Annamaria Gandolfo.</p>
 

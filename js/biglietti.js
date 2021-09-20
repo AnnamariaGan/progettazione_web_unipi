@@ -9,8 +9,11 @@ function insertPasseggero(num, tipoBambino){
     let nome = document.createElement("input");
     nome.setAttribute("type", "text");
     nome.setAttribute("name", "Nome");
-    nome.setAttribute("value", "");
- 
+    nome.setAttribute("value", "");  
+    
+    let nomeLabel = document.createElement("label");
+    nomeLabel.innerHTML = "nome";
+    newForm.appendChild(nomeLabel);
     newForm.appendChild(nome);
 
 
@@ -19,6 +22,9 @@ function insertPasseggero(num, tipoBambino){
     cognome.setAttribute("name", "Cognome");
     cognome.setAttribute("value", "");
 
+    let cognomeLabel = document.createElement("label");
+    cognomeLabel.innerHTML = "cognome";
+    newForm.appendChild(cognomeLabel);
     newForm.appendChild(cognome);
   
 
@@ -28,6 +34,9 @@ function insertPasseggero(num, tipoBambino){
     documento.setAttribute("value", "");
     documento.setAttribute("pattern", "[A-Za-z0-9]{9}")
 
+    let documentoLabel = document.createElement("label");
+    documentoLabel.innerHTML = "documento";
+    newForm.appendChild(documentoLabel);
     newForm.appendChild(documento);
 
 
@@ -64,32 +73,8 @@ function insertPasseggero(num, tipoBambino){
 
     newForm.appendChild(insert);
 
-    let formBagagli = document.createElement("form");
-    formBagagli.setAttribute("method", "post");
-    formBagagli.setAttribute("id", "bagaglio-".concat(num));
-    formBagagli.setAttribute("action", "./extraPay.php");
-
-
-    let bagagli = document.createElement("input");
-    bagagli.setAttribute("type", "number");
-    bagagli.setAttribute("name", "bagagli");
-    bagagli.setAttribute("value", "1");
-    bagagli.setAttribute("min", "1");
-    bagagli.setAttribute("max", '10');
-
-    formBagagli.appendChild(bagagli);
-
-
-    let aggiungiBagagli = document.createElement("input");
-    aggiungiBagagli.setAttribute("type", "submit");
-    aggiungiBagagli.setAttribute("value", "Aggiungi");
-
-    formBagagli.appendChild(aggiungiBagagli);
-
-
 
     document.body.appendChild(newForm);
-    document.body.appendChild(formBagagli);
 } 
 
 
