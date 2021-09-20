@@ -51,7 +51,7 @@
                     <?php
 
                     ?>
-                    <!-- ho pagato per le valigie extra -->
+                    
                 </div>
         </section>
 

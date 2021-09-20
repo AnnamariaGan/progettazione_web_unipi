@@ -3,8 +3,16 @@
 	session_start();
     include DIR_UTIL . "sessionUtil.php"; //per accedere all account tramite email
 
+	echo'
+	<header class="bar_header">
+			<div id ="header_wrapper" style = "text-align:center">
+				<a href="./gandolfo/index.php"><img src="/gandolfo/images/logo.png" 
+					alt="Logo 7Wings" width="420" height="187"> </a>
+			</div>
+	</header>
+	';
 	include('./layout/intestazione.php');  // logo e barra menu
-
+	
 	function utilityButton() {
 		echo '<section id = "importo">
 			<h5>TOTALE </h5>
@@ -30,17 +38,16 @@
 	}
 	
 	$thereareflies = false;
-	$dbHostname = "localhost";  //per il db
+	$dbHostname = "localhost"; 
 	$dbUsername = "root";
 	$dbPassword = "";
 	$dbName = "wings";
-	//connessione al db
+	
 	$con = mysqli_connect($dbHostname, $dbUsername, $dbPassword, $dbName);
 	if(mysqli_connect_errno()){
 		exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 	}
 	
-	//recupero quello che ho scritto
 	$tipo_viaggio = $_POST['tipo_viaggio'];
 	$partenza = $_POST['partenza'];
 	$destinazione = $_POST['destinazione'];
@@ -61,7 +68,6 @@
 	echo '<div id="numero-Adulti" style="visibility: hidden;">'.$adulti.'</div>';
 	echo '<div id="numero-Bambini" style="visibility: hidden;">'.$bambini.'</div>';
 
-	//carico i voli di sola andata
 	if(isset($tipo_viaggio, $partenza, $destinazione, $dataPartenza, $adulti) && $tipo_viaggio == "a") {
 			$queryText = "select * from volo V 
 						inner join rotta R on V.Rotta = R.idRotta 
@@ -72,11 +78,10 @@
 			$result = $con->query($queryText);
 			
 			echo '<h1>VOLI DI ANDATA</h1>';
-			if(mysqli_num_rows($result)==0){//!$result){  //nessun risultato
+			if(mysqli_num_rows($result)==0){
 				echo 'Mi dispiace, ma non abbiamo trovato 
 				nessun volo con queste caratteristiche';
-			} else {  //creo tabella
-				//echo '<div id="andataDiv" style="visibility: hidden;"></div>';
+			} else {  
 
 				echo '<div class="grid-container">';
 
@@ -103,7 +108,7 @@
 				echo '</div>';
 
 				echo '</div>';
-				//popolo tabella con i risultati
+				
 				while ($row = $result->fetch_assoc() ) {
 				// TO DO: refactor as function	
 					$postiLiberi = 250 - $row["PostiOccupati"];
@@ -148,7 +153,6 @@
 	//andata e ritorno
 	if(isset($tipo_viaggio) && $tipo_viaggio == "r"){
 		if (isset( $partenza, $destinazione, $dataPartenza)  ) {
-			//query di andata
 			$queryText = "select * from volo V 
 						inner join rotta R on V.Rotta = R.idRotta 
 						where R.Partenza= '".$partenza."'
@@ -157,12 +161,10 @@
 			
 			$result = $con->query($queryText);
 			echo '<h1>VOLI DI ANDATA</h1>';
-			if(mysqli_num_rows($result)==0){ //!$result){
+			if(mysqli_num_rows($result)==0){
 				echo 'Mi dispiace, ma non abbiamo trovato 
 				nessun volo.';
 			} else {
-				//echo '<div id="andataDiv" style="visibility: hidden;"></div>';
-
 				echo '<div class="grid-container">';
 
 					echo '<div class="grid-row">';
@@ -188,7 +190,7 @@
 						echo '</div>';
 
 					echo '</div>';
-				//$postiLiberi = 250 - $row["PostiOccupati"];
+
 				while ($row = $result->fetch_assoc() ) {
 					$postiLiberi = 250 - $row["PostiOccupati"];
 
@@ -230,8 +232,6 @@
 		}
 	}
 			
-//| ??
-		//echo $dataRitorno;
 		if(isset($partenza, $destinazione, $dataRitorno, $tipo_viaggio)
 		 && $tipo_viaggio == 'r'){
 			$queryText = "select * from volo V 
@@ -246,7 +246,6 @@
 				echo 'Mi dispiace, ma non abbiamo trovato 
 				nessun volo.';
 			}else{
-				//echo '<div id="ritornoDiv" style="visibility: hidden;"></div>';
 
 				echo '<div class="grid-container">';
 					echo '<div class="grid-row">';
@@ -310,12 +309,8 @@
 			}	
 		}
 	utilityButton();
-	/*if (!$thereareflies) {
-	//	echo 'disabled';
-	}*/
 	
-	//echo '<script src="/gandolfo/js/voli.js">';	
-	$con->close();    //chiudo la connessione
+	$con->close();  
 ?>
 
 <!DOCTYPE html>
@@ -329,12 +324,12 @@
 		<!-- css grid , questo non ricordo a cosa si riferisce--> 
 		<link href="./../css/voli.css" rel="stylesheet" type="text/css">
 		<title>voli</title>
-
+		
 		
 	</head>
 	
 	<body>
-
+		
         <section id = "infoPrezzi">
             <h1>
                 IMPORTANTE

@@ -6,13 +6,12 @@
 	error_reporting(E_ALL);
 	/***********************************************/
 	
-	require_once __DIR__ . "/util/config.php"; //define dir e cose
+	require_once __DIR__ . "/util/config.php"; 
 	session_start();
-    include DIR_UTIL . "sessionUtil.php"; //per accedere all account tramite email
-
-	include('./layout/intestazione.php');  // logo e barra menu
+    include DIR_UTIL . "sessionUtil.php";
+	include('./layout/intestazione.php'); 
 	
-	$dbHostname = "localhost";  //per il db
+	$dbHostname = "localhost"; 
 	$dbUsername = "root";
 	$dbPassword = "";
 	$dbName = "wings";
@@ -24,13 +23,11 @@
 	$partenza = '';
 	$destinazione = '';
 
-	//connessione al db
 	$con = mysqli_connect($dbHostname, $dbUsername, $dbPassword, $dbName);
 	if(mysqli_connect_errno()){
 		exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 	}
 
-	//recupero numero bambini e prenotazioni
 	$queryText = "select * from prenotazioni P 
 				inner join volo V on V.idVolo = P.volo
 				inner join rotta R on V.Rotta = R.idRotta
@@ -56,9 +53,7 @@
 	echo $_POST['idPrenotazione'];
 	echo '</div>';
 	
-	//include('./loadTicketsUtil.php');
 	function loadTickets($con){
-		//recupero i biglietti gia` cheked in
 		$queryText = "select * from passeggero P
 					where P.prenotazione = " . $_POST['idPrenotazione'] .";";
 		

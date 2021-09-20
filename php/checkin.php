@@ -1,8 +1,4 @@
-
 <?php
-	
-	//	echo '<h3>"I miei viaggi"</h3>';
-
 		$dbHostname = "localhost";
 		$dbUsername = "root";
 		$dbPassword = "";
@@ -23,9 +19,9 @@
 		
 		echo '<h1>I TUOI VOLI PRENOTATI</h1>';
 
-			if(mysqli_num_rows($result)==0){//!$result){  //nessun risultato
+			if(mysqli_num_rows($result)==0){
 				echo 'Mi dispiace, ma non hai ancora prenotato nessun volo';
-			} else {  //creo tabella
+			} else {  
 				echo '<div id="voliDiv" style="visibility: hidden;"></div>';
 
 				echo '<div class="grid-container">';
@@ -57,9 +53,9 @@
 				echo '</div>';
 				
 				echo '</div>';
-				//popolo tabella con i risultati
+				
 				while ($row = $result->fetch_assoc() ) {
-					//da aggiustare
+					
 					echo '<div class="grid-row" onclick="rowClick(';
 					echo $row['idVolo'].');" id="row-'.$row['idVolo'].'">';
 
@@ -88,25 +84,6 @@
 
 				echo '</div>';
 			}
-		//carico dal db i voli per check in
-		// form con ub tot di persone che ci metto nome cogno documento e numero di bagagli in piu
-		// php che vede quanti bagagli > 0 ci sono e me li fa pagare alla fine-
-
-		/*
-		caso d uso 
-
-		seleziono dalla tabello il volo per cui fare il check in 
-		inserisco nel form nome e cognome e carta d identia 
-		inserisco numero di bagagli in piu.
-		
-
-		se num bagagli > 0 
-		allora pago e check in fatto
-
-		altrimenti check in fatto
-		*/
- 
-
 ?>
        
         

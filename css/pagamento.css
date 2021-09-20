@@ -5,3 +5,6 @@
 #logo{
    text-align:center;
 }
+body {
+    text-align: center; /* Centra i box contenuti nel body per IE */
+}

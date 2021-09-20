@@ -1,7 +1,6 @@
 <?php
 	require_once __DIR__ . "/util/config.php";
-	//qui non dovrebbe servire la sessione!
-	//session_start();
+	
     include DIR_UTIL . "sessionUtil.php";
 
 	$dbHostname = "localhost";
@@ -14,7 +13,6 @@
 		exit('Failed to connect to MySQL: ' . mysqli_connect_error() );
 	}
 
-	//recupero quello che ho scirtto
     $nome = $_POST['nome'];
     $cognome = $_POST['cognome'];
 	$email = $_POST['email'];
@@ -23,7 +21,6 @@
  
 	if(isset($nome, $cognome, $email, $password1, $password2)){
         if($password1 == $password2){
-            //query di insert
             $queryText = " INSERT INTO utente (Nome, Cognome, Email , Pass )
                        VALUES('".$nome."', '".$cognome."', '".$email."', '".$password1."');";
               
@@ -47,7 +44,6 @@
 		<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" /> 
 		<!-- inserire il css account.css di account se necessario.
 		 ogni sottocodice ha il suo css ma non lo rpende in questo caso-->
-	<!--	<script src="/gandolfo/js/registrati.js"></script> -->
 		<title>registrati</title>
 	</head>
 	

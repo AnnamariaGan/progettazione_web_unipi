@@ -5,30 +5,10 @@
 	ini_set('display_startup_errors',1);
 	error_reporting(E_ALL);
 	/***********************************************/
-	session_start();  //crea una sessione o riprende quella corrente in base ad un identificatore passato
-					// tramite richiesta GET o POST
-	require_once __DIR__. "/php/util/config.php"; //includi il file se non e gia incluso
+	session_start();  
+	require_once __DIR__. "/php/util/config.php";
 	
 	include DIR_UTIL . "sessionUtil.php"; 
-
-	//la connessione deve essere aperta e poi subito dopo chiusa,
-	//questo in ogni funzione ajax.
-/*	$servername = "localhost";
-	$username = "root";
-	$password = "password";
-	$dbName = "wings";   //questi sono pero settati anche dbConfig.php,
-						// nel caso includere quel file. (php/util)
-
-	// Create connection
-	$conn = new mysqli($servername, $username, $password, $dbName);
-
-	// Check connection
-	if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
-	}
-	echo "Connected successfully";  //da togliere prima di consegnare
-*/
-	//echo isLogged();
 ?>
 
 <!DOCTYPE html>
@@ -37,23 +17,23 @@
 		<meta charset="utf-8">
 		<meta name = "author" content = "progetto">
 		<meta name = "keywords" content = "sito">
-		<!-- TO DO: creare un file css  index.css e inserirlo se necessatio-->
 		<link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico" /> 
+		<link href="./css/index.css" rel="stylesheet" type="text/css">
 		<title>CercaVoliHomePage</title>
 	</head>
 	
 	<body>  
-		
-		<!-- intestazione = {logo, barra menu} -->
 		<section id = "intestazione"> 
+			<div id ="header_wrapper" style = "text-align:center">
+				<img src="/gandolfo/images/logo.png" alt="Logo 7Wings" width="420" height="187"> 
+			</div>
+
 			<?php
-				include('./php/layout/intestazione.php');   //il suo css scazza 
+				include('./php/layout/intestazione.php');   
 			?>
 		</section>
 		
-		<!--form cerca voli -->
 		<section id = "searchVolo">
-		
 			<form id = "cerca_volo" method="post" > <!-- centrare questa sezione -->
 				<h2> <img src="images/aereo_stilizzato.jpg" alt="aereo" style="width:8%;"> VOLI</h2> 
 			
@@ -99,13 +79,14 @@
 
 				<input type="submit" value="Cerca volo" onclick= "controlloCampi();"/> 
 				<p>
-					*I neonati da 0 a 23 mesi viaggiano gratuitamente.
-					I bambini da 2 a 16 anni pagano mezzo biglietto.
+					*I neonati (considerati fino a 3 anni) viaggiano gratuitamente.
+					Non necessitano di biglietto aereo.
+					I bambini da 3 a 16 anni (compresi) pagano mezzo biglietto.
 				</p>
 			</form>
 		</section>
 		
-		<section>  <!-- Fatti ispirare con le foto delle regioni-->
+		<section> 
 			<div class = "carosello">
 				<?php
 					include('./php/layout/carosello.php');
@@ -115,24 +96,24 @@
 		</section>
 		
 		<footer id="sign_in_footer">
-			<!-- metodi di pagamento e seguici sui social -->
+			
 			<div id = "metodipagamento">
 				<?php
 					include('./php/layout/metodoPagamento.php');
 				?>
 			</div>
 			
-			<!--termini e condizioni ecc -->
+			
 			<div class="legal_form">
 				<?php
 					include('./php/layout/footer.php');
 				?>
 			</div>
 		</footer>
-		<!-- non spostare gli script-->
-		<script src="./js/ajax/rotta.js"></script>   <!-- qui vengono caricate tutte le rotte -->
-		<script src="./js/controlli.js"></script> <!-- controllo sulle date -->
-		<script src="./js/index.js"></script> <!-- controllo sui campi inseriti dall utente -->
+		
+		<script src="./js/ajax/rotta.js"></script>  
+		<script src="./js/controlli.js"></script> 
+		<script src="./js/index.js"></script> 
 	</body>
 	
 </html>

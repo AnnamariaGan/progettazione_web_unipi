@@ -18,3 +18,7 @@ img{
 p{
 	font-size: 14;
 }
+
+body {
+    text-align: center; /* Centra i box contenuti nel body per IE */
+}

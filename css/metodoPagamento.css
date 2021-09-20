@@ -33,3 +33,7 @@
   background: #881265; 
   color: white;
 }
+
+body {
+  text-align: center; /* Centra i box contenuti nel body per IE */
+}
