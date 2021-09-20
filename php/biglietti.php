@@ -50,7 +50,7 @@
 			$partenza = $row['Partenza'];
 			$destinazione = $row['Destinazione'];
 			$checked = $row['check'];
-
+			$checkedChildren = $row['checkChildren'];
 		}
 	}
 
@@ -80,6 +80,7 @@
 					echo 'adulto';
 				}
 				echo '
+				<br>
 				';
 			}
 		}
@@ -148,13 +149,30 @@
 
 		
 		<?php
+			/*
 			echo '<input id="totalRequested" type="number" value="';
 			echo ($adulti + $bambini);
 			echo '" hidden>';
+			*/
 		?>
 		<?php
-			echo '<input id="checkedTickets" type="number" value="';
-			echo $checked;
+			echo '<input id="adultRequested" type="number" value="';
+			echo $adulti;
+			echo '" hidden>';
+		?>
+		<?php
+			echo '<input id="childrenRequested" type="number" value="';
+			echo $bambini;
+			echo '" hidden>';
+		?>
+		<?php
+			echo '<input id="checkedAdults" type="number" value="';
+			echo ($checked - $checkedChildren);
+			echo '" hidden>';
+		?> 
+		<?php
+			echo '<input id="checkedChildren" type="number" value="';
+			echo $checkedChildren;
 			echo '" hidden>';
 		?> 
 			
@@ -191,8 +209,15 @@
 				loadTickets.appendChild(txt);
 				document.getElementById("loadTicketsContainer").appendChild(loadTickets);
 				
-				let checkedVal = parseInt(document.getElementById("checkedTickets").value) + 1;
-				document.getElementById("checkedTickets").value = checkedVal.toString();
+				const tipo = document.getElementById("tipoPasseggero-'.$i.'").value;
+				if (tipo == "adulto") {
+					let chkdAdults = parseInt(document.getElementById("checkedAdults").value) + 1;
+					document.getElementById("checkedAdults").value = chkdAdults.toString();
+				} else {
+					let chkdChildren = parseInt(document.getElementById("checkedChildren").value) + 1;
+					document.getElementById("checkedChildren").value = chkdChildren.toString();
+				}
+
 			} );
 
 			// Define what happens in case of error

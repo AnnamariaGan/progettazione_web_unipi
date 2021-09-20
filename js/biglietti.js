@@ -34,6 +34,8 @@ function insertPasseggero(num, tipoBambino){
     let tipoBambinoDiv = document.createElement("input");
     tipoBambinoDiv.setAttribute("type", "text");
     tipoBambinoDiv.setAttribute("name", "tipoBambino");
+    tipoBambinoDiv.setAttribute("id", "tipoPasseggero-".concat(num));
+
     tipoBambinoDiv.setAttribute("readonly", true);
     
     if (tipoBambino != "bambino") {
@@ -62,20 +64,50 @@ function insertPasseggero(num, tipoBambino){
 
     newForm.appendChild(insert);
 
+    let formBagagli = document.createElement("form");
+    formBagagli.setAttribute("method", "post");
+    formBagagli.setAttribute("id", "bagaglio-".concat(num));
+    formBagagli.setAttribute("action", "./extraPay.php");
+
+
+    let bagagli = document.createElement("input");
+    bagagli.setAttribute("type", "number");
+    bagagli.setAttribute("name", "bagagli");
+    bagagli.setAttribute("value", "1");
+    bagagli.setAttribute("min", "1");
+    bagagli.setAttribute("max", '10');
+
+    formBagagli.appendChild(bagagli);
+
+
+    let aggiungiBagagli = document.createElement("input");
+    aggiungiBagagli.setAttribute("type", "submit");
+    aggiungiBagagli.setAttribute("value", "Aggiungi");
+
+    formBagagli.appendChild(aggiungiBagagli);
+
+
+
     document.body.appendChild(newForm);
+    document.body.appendChild(formBagagli);
 } 
 
 
-function firstLoadPasseggeri(){
-    let tot = document.getElementById('totalRequested').value;
-    //console.log(tot);
-    tot -= document.getElementById('checkedTickets').value;
-    //console.log(tot);
-    if (tot < 0) {
+function firstLoadPasseggeri() {
+    let adultsNum = parseInt(document.getElementById('adultRequested').value);
+    let childrenNum = parseInt(document.getElementById('childrenRequested').value);
+    adultsNum -= parseInt(document.getElementById('checkedAdults').value);
+    childrenNum -= parseInt(document.getElementById('checkedChildren').value);
+    
+    if (adultsNum < 0 || childrenNum < 0) {
         alert("An unexpected error occurred");
-        console.log("totalRequested tickets are less than checkedTickets o_O .");
+        console.log("adults or children tickets are less than their kind of checked tickets o_O .");
     }
-//>>>>>>>>>>>>>>>>>>>>>TO DO CHANGE THIS
-    for(let i = 0; i < tot; i++ )
-        insertPasseggero(i,"adulto");
+//>>>>>>>>>>>>>>>>>>>>>TO DO: rincontrollare
+    for(let i = 0; i < adultsNum; i++ )
+        insertPasseggero(i, "adulto");
+
+    const tot = childrenNum + adultsNum;
+    for (let i = adultsNum; i < tot; i++)
+        insertPasseggero(i, "bambino");
 }

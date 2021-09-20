@@ -26,6 +26,11 @@
     if (isset($_COOKIE['numero']) ) {
         $numero = $_COOKIE['numero'];
     }
+
+    $bambini = 0;
+    if ( isset($_COOKIE['bambini']) ) {
+        $bambini = $_COOKIE['bambini'];
+    }
     /*echo 'numero: ';
     if (isset($_SESSION['adulti']) ) {
         $numero += $_SESSION['adulti'];
@@ -37,52 +42,107 @@
 
     echo $numero . '\n';
     */
-    if (isset($_COOKIE['andataDiv']) ){
+    if (isset($_COOKIE['andataDiv']) ) {
         $andate = $_COOKIE['andataDiv'];
-       
+        if (is_array($andate)) {
+            foreach ($andate as $key => $andata) {
+                $queryText = "INSERT INTO prenotazioni(volo, postiPrenotati, utente, bambini)
+                        value ('".$andata."', ".$numero.", '".$username."', ".$bambini.")";
+                    
+                $stm = $con->query($queryText);
+
+                $queryText = "UPDATE volo
+                    SET PostiOccupati = PostiOccupati + ".$numero."
+                    WHERE idVolo = ".$andata.";";
+                $stm = $con->query($queryText);
+            }
+        } else {
+            $queryText = "INSERT INTO prenotazioni(volo, postiPrenotati, utente, bambini)
+                        value ('".$andata."', ".$numero.", '".$username."', ".$bambini.")";
+                    
+            $stm = $con->query($queryText);
+
+            $queryText = "UPDATE volo
+                SET PostiOccupati = PostiOccupati + ".$numero."
+                WHERE idVolo = ".$andata.";";
+            $stm = $con->query($queryText);
+        }
+
+        $ritorni = $_COOKIE['ritornoDiv'];
+        if (is_array($ritorni)) {
+            foreach ($ritorni as $key => $ritorno) {
+                $queryText = "INSERT INTO prenotazioni(volo, postiPrenotati, utente, bambini)
+                        value ('".$ritorno."', ".$numero.", '".$username."', ".$bambini.")";
+                    
+                $stm = $con->query($queryText);
+
+                $queryText = "UPDATE volo
+                    SET PostiOccupati = PostiOccupati + ".$numero."
+                    WHERE idVolo = ".$ritorno.";";
+                $stm = $con->query($queryText);
+            }
+        } else {
+            $queryText = "INSERT INTO prenotazioni(volo, postiPrenotati, utente, bambini)
+                        value ('".$ritorno."', ".$numero.", '".$username."', ".$bambini.")";
+                    
+            $stm = $con->query($queryText);
+
+            $queryText = "UPDATE volo
+                SET PostiOccupati = PostiOccupati + ".$numero."
+                WHERE idVolo = ".$ritorno.";";
+            $stm = $con->query($queryText);
+        }
+    }
+        /*
         $queryText = '';
         if (is_array($andate)) {
             for ($i = 0; $i < count($andate); $i++) {
                 $andata = $andate[$i];
                
-                $queryText = "INSERT INTO prenotazioni(volo, postiPrenotati, utente)
-                    value ('".$andata."', ".$numero.", '".$username."')";
+                $queryText = "INSERT INTO prenotazioni(volo, postiPrenotati, utente, bambini)
+                    value ('".$andata."', ".$numero.", '".$username."', ".$bambini.")";
                 
                 $stm = $con->query($queryText);
-                
+
+                $queryText = "UPDATE volo
+                    SET PostiOccupati = PostiOccupati + 1
+                    WHERE idVolo = ";
+                $stm = $con->query($queryText);
             }
+        
         } else {
             
-            $queryText = "INSERT INTO prenotazioni(volo, postiPrenotati, utente)
-                    value ('".$andate."', ".$numero.", '".$username."')";
+            $queryText = "INSERT INTO prenotazioni(volo, postiPrenotati, utente, bambini)
+                    value ('".$andate."', ".$numero.", '".$username."', ".$bambini.")";
             
             $stm = $con->query($queryText);
          
         }
         //$stmt = $con->query($queryText);
-    }
-    
+        */
+    //}
+    /*
     if (isset($_COOKIE['ritornoDiv']) ){
         $ritorni = $_COOKIE['ritornoDiv'];
         if (is_array($ritorni)) {
             for ($i = 0; $i < count($andate); $i++) {
                 $ritorno = $ritorni[$i];
         
-                $queryText = "INSERT INTO prenotazioni(volo, postiPrenotati, utente)
-                    value ('".$ritorno."', ".$numero.", '".$username."')";
+                $queryText = "INSERT INTO prenotazioni(volo, postiPrenotati, utente, bambini)
+                    value ('".$ritorno."', ".$numero.", '".$username."', ".$bambini.")";
                 
                 $stm = $con->query($queryText);
             }
 
         } else {
-            $queryText = "INSERT INTO prenotazioni(volo, postiPrenotati, utente)
-                    value ('".$ritorni."', ".$numero.", '".$username."')";
+            $queryText = "INSERT INTO prenotazioni(volo, postiPrenotati, utente, bambini)
+                    value ('".$ritorni."', ".$numero.", '".$username."', ".$bambini.")";
             
             $stm = $con->query($queryText);
            
         }
         //$stmt = $con->query($queryText);
-    }    
+    }    */
 
    /*
     if ($errorMessage === null) {
@@ -105,4 +165,4 @@
     alert('Pagamento effettuato con successo!');
     </script>";*/
     header('location: /gandolfo/index.php');
-?>        
+?>

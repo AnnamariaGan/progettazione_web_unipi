@@ -34,6 +34,10 @@
 		echo $nome.' '.$cognome.' '.$documento.' ';
 		if ($bambino == 1) {
 			echo 'bambino';
+			$query2 = "UPDATE prenotazioni
+				SET `checkChildren` = `checkChildren` + 1
+				WHERE id = ".$idPrenotazione.";";
+			$stmt2 = $con->query($query2);
 		} else {
 			echo 'adulto';
 		}
