@@ -45,11 +45,18 @@
         }
 
         if( isset($username, $password) ){
+            $stmt = $con->prepare("select * 
+                from utente
+                where Email = ? and Pass = ?;");
+            $stmt->bind_param('ss', $username, $password);
+            $result = $stmt->execute();
+    /*        
             $queryText = "select * 
                         from utente
                         where Email = '".$username."' and Pass = '".$password."';" ;
             
             $result = $con->query($queryText);
+    */
             $ret = mysqli_num_rows($result);
             $con->close();
             return $ret;

@@ -20,12 +20,16 @@
 	$idPrenotazione = $_POST['numeroPrenotazione'];
 	
 	if (isset($nome, $cognome, $documento, $bambino) ) {
-      
+		$stmt = $con->prepare(" INSERT INTO passeggero (Nome, Cognome, Documento, bambino, prenotazione)
+			VALUES(?, ?, ?, ?, ?);");
+		$stmt->bind_param('sssii', $nome, $cognome, $documento, $bambino, $idPrenotazione);
+		$stmt->execute();
+/*
         $queryText = " INSERT INTO passeggero (Nome, Cognome, Documento, bambino, prenotazione)
                 VALUES('".$nome."', '".$cognome."', '".$documento."', ".$bambino.", ".$idPrenotazione.");";
         
         $stmt = $con->query($queryText);
-
+*/
 
 		//echo $queryText; 
 //<<<<<<<<<< TO DO:
@@ -34,27 +38,45 @@
 		echo $nome.' '.$cognome.' '.$documento.' ';
 		if ($bambino == 1) {
 			echo 'bambino';
+			$stmt2 = $con->prepare( "UPDATE prenotazioni
+				SET `checkChildren` = `checkChildren` + 1
+				WHERE id = ?;");
+			$stmt2->bind_param('i', $idPrenotazione);
+			$stmt2->execute();
+/*
 			$query2 = "UPDATE prenotazioni
 				SET `checkChildren` = `checkChildren` + 1
 				WHERE id = ".$idPrenotazione.";";
 			$stmt2 = $con->query($query2);
+*/
 		} else {
 			echo 'adulto';
 		}
 
-
+		$stmt2 = $con->prepare( "UPDATE prenotazioni
+				SET `check` = `check` + 1
+				WHERE id = ?;");
+		$stmt2->bind_param('i', $idPrenotazione);
+		$stmt2->execute();
+/*
 		$query2 = "UPDATE prenotazioni
 			SET `check` = `check` + 1
 			WHERE id = ".$idPrenotazione.";";
 		$stmt2 = $con->query($query2);
+*/
 	}
 
     function loadTickets($con){
+		$stmt = $con->prepare("select * from passeggero P
+		where P.prenotazione = ?;");
+		$stmt->bind_param('i', $idPrenotazione);
+		$result = $stmt->execute();
+/*
 		$queryText = "select * from passeggero P
 					where P.prenotazione = " . $idPrenotazione .";";
 		
 		$result = $con->query($queryText);
-		
+*/		
 		if(mysqli_num_rows($result) > 0) {
 			while ($row = $result->fetch_assoc() ) {
 				echo $row['Nome'];

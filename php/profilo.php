@@ -25,6 +25,16 @@
 		if(mysqli_connect_errno()){
 			exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 		}
+		
+		$stmt = $con->prepare( "select * from volo V 
+		inner join rotta R on V.Rotta = R.idRotta 
+		inner join prenotazioni P on V.idvolo = P.volo
+		where P.utente = ?
+			AND P.`check` < P.`postiPrenotati`
+		order by V.`Data` DESC, V.`Ora` DESC, P.`check` DESC;");
+		$stmt->bind_param('s', $_SESSION['mail']);
+		$result = $stmt->execute();
+/*
 		$queryText = "select * from volo V 
 					inner join rotta R on V.Rotta = R.idRotta 
 					inner join prenotazioni P on V.idvolo = P.volo
@@ -33,7 +43,7 @@
 					order by V.`Data` DESC, V.`Ora` DESC, P.`check` DESC;" ;
 						
 		$result = $con->query($queryText);
-		
+*/		
 		if(mysqli_num_rows($result)==0){
 			echo 'Non hai prenotato nessun volo.';
 		} else {  

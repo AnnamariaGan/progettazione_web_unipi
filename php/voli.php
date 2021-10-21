@@ -72,6 +72,14 @@
 	echo '<div id="numero-Bambini" style="visibility: hidden;">'.$bambini.'</div>';
 
 	if(isset($tipo_viaggio, $partenza, $destinazione, $dataPartenza, $adulti) && $tipo_viaggio == "a") {
+			$stmt = $con->prepare("select * from volo V 
+				inner join rotta R on V.Rotta = R.idRotta 
+				where R.Partenza = ?
+					and R.Destinazione = ?
+					and V.Data = ?;");
+			$stmt->bind_param('sss', $partenza, $destinazione, $dataPartenza);
+			$result = $stmt->execute();
+/*
 			$queryText = "select * from volo V 
 						inner join rotta R on V.Rotta = R.idRotta 
 						where R.Partenza= '".$partenza."'
@@ -79,7 +87,7 @@
 						and V.Data='".$dataPartenza."';" ;
 						
 			$result = $con->query($queryText);
-			
+*/			
 			echo '<h1>VOLI DI ANDATA</h1>';
 			if(mysqli_num_rows($result)==0){
 				echo 'Mi dispiace, ma non abbiamo trovato 
@@ -156,6 +164,14 @@
 	//andata e ritorno
 	if(isset($tipo_viaggio) && $tipo_viaggio == "r"){
 		if (isset( $partenza, $destinazione, $dataPartenza)  ) {
+			$stmt = $con->prepare("select * from volo V 
+				inner join rotta R on V.Rotta = R.idRotta 
+				where R.Partenza = ?
+					and R.Destinazione = ?
+					and V.Data = ?;");
+			$stmt->bind_param('sss', $partenza, $destinazione, $dataPartenza);
+			$result = $stmt->execute();
+	/*
 			$queryText = "select * from volo V 
 						inner join rotta R on V.Rotta = R.idRotta 
 						where R.Partenza= '".$partenza."'
@@ -163,6 +179,7 @@
 						and V.Data='".$dataPartenza."';" ;
 			
 			$result = $con->query($queryText);
+	*/
 			echo '<h1>VOLI DI ANDATA</h1>';
 			if(mysqli_num_rows($result)==0){
 				echo 'Mi dispiace, ma non abbiamo trovato 
@@ -237,6 +254,14 @@
 			
 		if(isset($partenza, $destinazione, $dataRitorno, $tipo_viaggio)
 		 && $tipo_viaggio == 'r'){
+			$stmt = $con->prepare("select * from volo V 
+			inner join rotta R on V.Rotta = R.idRotta 
+			where R.Partenza = ?
+				and R.Destinazione = ?
+				and V.Data = ?;");
+			$stmt->bind_param('sss', $partenza, $destinazione, $dataPartenza);
+			$result = $stmt->execute();
+	/*
 			$queryText = "select * from volo V 
 						inner join rotta R on V.Rotta = R.idRotta 
 						where R.Partenza= '".$destinazione."'
@@ -244,6 +269,7 @@
 						and V.Data='".$dataRitorno."';" ;
 			
 			$result = $con->query($queryText);
+	*/
 			echo '<h1>VOLI DI RITORNO</h1>';
 			if(mysqli_num_rows($result)==0){
 				echo 'Mi dispiace, ma non abbiamo trovato 

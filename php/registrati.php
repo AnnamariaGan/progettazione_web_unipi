@@ -24,11 +24,16 @@
  
 	if(isset($nome, $cognome, $email, $password1, $password2)){
         if($password1 == $password2){
+            $stmt = $con->prepare(" INSERT INTO utente (Nome, Cognome, Email , Pass )
+            VALUES(?, ?, ?, ?);");
+            $stmt->bind_param("ssss", $nome, $cognome, $email, $password1);
+            $stmt->execute();
+/*
             $queryText = " INSERT INTO utente (Nome, Cognome, Email , Pass )
                        VALUES('".$nome."', '".$cognome."', '".$email."', '".$password1."');";
               
             $stmt = $con->query($queryText);
-               
+ */              
             echo "Benvenuto nel nostro team! Ora puoi effettuare l'accesso dalla home page";
         }else{
             echo "ATTENZIONE Le due password non corrispondono!";

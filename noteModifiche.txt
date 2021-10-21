@@ -1,0 +1,14 @@
+mysql injection ok:
+	voli.php
+	registrati.php
+	profilo.php
+	prenotazione.php
+	login.php
+	loadTicketsUtil.php
+	checkindbutil.php
+	checkin.php
+	biglietti.php
+
+currently modifing:
+	
+

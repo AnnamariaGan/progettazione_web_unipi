@@ -10,6 +10,15 @@
 		}
 		$utente = $_SESSION['mail'];
 		
+		$stmt = $con->prepare("select * from prenotazioni P 
+			inner join volo V on V.idVolo = P.volo
+			inner join rotta R on V.Rotta = R.idRotta
+			where P.utente = ? 
+				and P.`check` >= P.`postiPrenotati`
+			order by V.`Data` DESC, V.`Ora` DESC, P.`check` DESC;");
+		$stmt->bind_param('s', $utente);
+		$result = $stmt->execute();
+/*
 		$queryText = "select * from prenotazioni P 
 					inner join volo V on V.idVolo = P.volo
 					inner join rotta R on V.Rotta = R.idRotta
@@ -18,7 +27,7 @@
 					order by V.`Data` DESC, V.`Ora` DESC, P.`check` DESC;" ;
 			
 		$result = $con->query($queryText);
-		
+*/		
 		echo '<h1>I TUOI VOLI PRENOTATI</h1>';
 
 			if(mysqli_num_rows($result)==0){
