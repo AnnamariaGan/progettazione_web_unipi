@@ -46,51 +46,105 @@
         $andate = $_COOKIE['andataDiv'];
         if (is_array($andate)) {
             foreach ($andate as $key => $andata) {
+                $stmt = $con->prepare("INSERT INTO prenotazioni(volo, postiPrenotati, utente, bambini)
+                    value (?, ?, ?, ?)");
+                $stmt->bind_param('iisi', $andata, $numero, $username, $bambini);
+                $stmt->execute();
+/*
                 $queryText = "INSERT INTO prenotazioni(volo, postiPrenotati, utente, bambini)
                         value ('".$andata."', ".$numero.", '".$username."', ".$bambini.")";
                     
                 $stm = $con->query($queryText);
-
+*/
+                $stmt = $con->prepare( "UPDATE volo
+                    SET PostiOccupati = PostiOccupati + ?
+                    WHERE idVolo = ?;");
+                $stmt->bind_param('ii', $numero, $andata);
+                $stm->execute();
+/*
                 $queryText = "UPDATE volo
                     SET PostiOccupati = PostiOccupati + ".$numero."
                     WHERE idVolo = ".$andata.";";
                 $stm = $con->query($queryText);
+*/
             }
         } else {
+            //solo a fini di leggibilita`
+            $andata = $andate;
+            $stmt = $con->prepare("INSERT INTO prenotazioni(volo, postiPrenotati, utente, bambini)
+                value (?, ?, ?, ?)");
+            $stmt->bind_param('iisi', $andata, $numero, $username, $bambini);
+            $stmt->execute();
+/*
             $queryText = "INSERT INTO prenotazioni(volo, postiPrenotati, utente, bambini)
-                        value ('".$andata."', ".$numero.", '".$username."', ".$bambini.")";
-                    
+                    value ('".$andata."', ".$numero.", '".$username."', ".$bambini.")";
+                
             $stm = $con->query($queryText);
-
+*/
+            $stmt = $con->prepare( "UPDATE volo
+                SET PostiOccupati = PostiOccupati + ?
+                WHERE idVolo = ?;");
+            $stmt->bind_param('ii', $numero, $andata);
+            $stm->execute();
+/*
             $queryText = "UPDATE volo
                 SET PostiOccupati = PostiOccupati + ".$numero."
                 WHERE idVolo = ".$andata.";";
             $stm = $con->query($queryText);
+*/
         }
+
 
         $ritorni = $_COOKIE['ritornoDiv'];
         if (is_array($ritorni)) {
             foreach ($ritorni as $key => $ritorno) {
+                $stmt = $con->prepare("INSERT INTO prenotazioni(volo, postiPrenotati, utente, bambini)
+                    value (?, ?, ?, ?)");
+                $stmt->bind_param('iisi', $ritorno, $numero, $username, $bambini);
+                $stmt->execute();
+/*
                 $queryText = "INSERT INTO prenotazioni(volo, postiPrenotati, utente, bambini)
                         value ('".$ritorno."', ".$numero.", '".$username."', ".$bambini.")";
                     
                 $stm = $con->query($queryText);
-
+*/
+                $stmt = $con->prepare( "UPDATE volo
+                SET PostiOccupati = PostiOccupati + ?
+                WHERE idVolo = ?;");
+                $stmt->bind_param('ii', $numero, $ritorno);
+                $stm->execute();
+/*                
                 $queryText = "UPDATE volo
                     SET PostiOccupati = PostiOccupati + ".$numero."
                     WHERE idVolo = ".$ritorno.";";
                 $stm = $con->query($queryText);
+*/
             }
         } else {
+            //solo a fini di leggibilita`
+            $ritorno = $ritorni;
+            
+            $stmt = $con->prepare("INSERT INTO prenotazioni(volo, postiPrenotati, utente, bambini)
+                value (?, ?, ?, ?)");
+            $stmt->bind_param('iisi', $ritorno, $numero, $username, $bambini);
+            $stmt->execute();
+/*
             $queryText = "INSERT INTO prenotazioni(volo, postiPrenotati, utente, bambini)
-                        value ('".$ritorno."', ".$numero.", '".$username."', ".$bambini.")";
-                    
+                    value ('".$ritorno."', ".$numero.", '".$username."', ".$bambini.")";
+                
             $stm = $con->query($queryText);
-
+*/
+            $stmt = $con->prepare( "UPDATE volo
+            SET PostiOccupati = PostiOccupati + ?
+            WHERE idVolo = ?;");
+            $stmt->bind_param('ii', $numero, $ritorno);
+            $stm->execute();
+/*                
             $queryText = "UPDATE volo
                 SET PostiOccupati = PostiOccupati + ".$numero."
                 WHERE idVolo = ".$ritorno.";";
             $stm = $con->query($queryText);
+*/
         }
     
         /*

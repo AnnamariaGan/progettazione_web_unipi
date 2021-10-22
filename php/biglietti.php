@@ -29,13 +29,20 @@
 	if(mysqli_connect_errno()){
 		exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 	}
-
+	$stmt = $con->prepare("select * from prenotazioni P 
+		inner join volo V on V.idVolo = P.volo
+		inner join rotta R on V.Rotta = R.idRotta
+		where P.id = ?;");
+	$stmt->bind_param('i', $_POST['idPrenotazione']);
+	$result = $stmt->execute();
+/*
 	$queryText = "select * from prenotazioni P 
 				inner join volo V on V.idVolo = P.volo
 				inner join rotta R on V.Rotta = R.idRotta
 				where P.id = " . $_POST['idPrenotazione'] .";";
 	
 	$result = $con->query($queryText);
+*/
 	//echo $result;
 	if(mysqli_num_rows($result)==0){
 		echo 'Errore, qualcosa è andato storto, riprovare o contattare l\'assistenza.';
@@ -57,11 +64,16 @@
 	echo '</div>';
 	
 	function loadTickets($con){
+		$stmt = $con->prepare("select * from passeggero P
+			where P.prenotazione = ?;");
+		$stmt->bind_param('i', $_POST['idPrenotazione']);
+		$result = $stmt->execute();
+/*
 		$queryText = "select * from passeggero P
 					where P.prenotazione = " . $_POST['idPrenotazione'] .";";
 		
 		$result = $con->query($queryText);
-		
+*/		
 		if(mysqli_num_rows($result) > 0) {
 			while ($row = $result->fetch_assoc() ) {
 				echo '<label>Nome:</label>';

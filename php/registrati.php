@@ -1,10 +1,12 @@
-<a href="/gandolfo/index.php"><img id = "logo" src="/gandolfo/images/logo.png" alt="Logo 7Wings"> </a>
-<br>
+<!-- a href="/gandolfo/index.php"><img id = "logo" src="/gandolfo/images/logo.png" alt="Logo 7Wings"> </a-->
 	
 <?php
+   
 	require_once __DIR__ . "/util/config.php";
 	
     include DIR_UTIL . "sessionUtil.php";
+
+    include('./layout/intestazione.php');   
 
 	$dbHostname = "localhost";
 	$dbUsername = "root";
@@ -19,18 +21,24 @@
     $nome = $_POST['nome'];
     $cognome = $_POST['cognome'];
 	$email = $_POST['email'];
-    $password1 = sha1(md5(sha1($_POST['psw'])));  
-    $password2 = sha1(md5(sha1($_POST['psw-repeat'])));
+    $password1 = $_POST['psw'];//sha1(md5(sha1($_POST['psw'])));  
+    $password2 = $_POST['psw-repeat'];//sha1(md5(sha1($_POST['psw-repeat'])));
  
 	if(isset($nome, $cognome, $email, $password1, $password2)){
         if($password1 == $password2){
+            $stmt = $con->prepare(" INSERT INTO utente (Nome, Cognome, Email , Pass )
+            VALUES(?, ?, ?, ?);");
+            $stmt->bind_param("ssss", $nome, $cognome, $email, $password1);
+            $stmt->execute();
+/*
             $queryText = " INSERT INTO utente (Nome, Cognome, Email , Pass )
                        VALUES('".$nome."', '".$cognome."', '".$email."', '".$password1."');";
               
             $stmt = $con->query($queryText);
-               
+ */              
             echo "Benvenuto nel nostro team! Ora puoi effettuare l'accesso dalla home page";
-        }else{
+            include('./php/layout/footer.php');
+        } else {
             echo "ATTENZIONE Le due password non corrispondono!";
         }			
 	}
