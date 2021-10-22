@@ -91,7 +91,9 @@
 				and V.Data = ?;");
 
 		$stmt->bind_param('sss', $partenza, $destinazione, $dataPartenza);
-		$result = $stmt->execute();
+		$stmt->execute();
+		$stmt->store_result();
+		$stmt->get_result($result);
 
 		echo '<h1>VOLI DI '.$tipo_volo.'</h1>';
 

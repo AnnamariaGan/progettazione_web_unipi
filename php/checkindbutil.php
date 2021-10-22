@@ -70,7 +70,9 @@
 		$stmt = $con->prepare("select * from passeggero P
 		where P.prenotazione = ?;");
 		$stmt->bind_param('i', $idPrenotazione);
-		$result = $stmt->execute();
+		$stmt->execute();
+		$stmt->store_result();
+		$stmt->get_result($result);
 /*
 		$queryText = "select * from passeggero P
 					where P.prenotazione = " . $idPrenotazione .";";

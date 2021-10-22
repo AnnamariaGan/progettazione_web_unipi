@@ -33,7 +33,9 @@
 			AND P.`check` < P.`postiPrenotati`
 		order by V.`Data` DESC, V.`Ora` DESC, P.`check` DESC;");
 		$stmt->bind_param('s', $_SESSION['mail']);
-		$result = $stmt->execute();
+		$stmt->execute();
+		$stmt->store_result();
+		$stmt->get_result($result);
 /*
 		$queryText = "select * from volo V 
 					inner join rotta R on V.Rotta = R.idRotta 

@@ -17,7 +17,9 @@
 				and P.`check` >= P.`postiPrenotati`
 			order by V.`Data` DESC, V.`Ora` DESC, P.`check` DESC;");
 		$stmt->bind_param('s', $utente);
-		$result = $stmt->execute();
+		$stmt->execute();
+		$stmt->store_result();
+		$stmt->get_result($result);
 /*
 		$queryText = "select * from prenotazioni P 
 					inner join volo V on V.idVolo = P.volo

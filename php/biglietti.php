@@ -34,7 +34,9 @@
 		inner join rotta R on V.Rotta = R.idRotta
 		where P.id = ?;");
 	$stmt->bind_param('i', $_POST['idPrenotazione']);
-	$result = $stmt->execute();
+	$stmt->execute();
+	$stmt->store_result();
+	$stmt->get_result($result);
 /*
 	$queryText = "select * from prenotazioni P 
 				inner join volo V on V.idVolo = P.volo
@@ -59,6 +61,8 @@
 		}
 	}
 
+	$stmt->close();
+
 	echo '<div id="idPrenotazioneDiv" hidden>';
 	echo $_POST['idPrenotazione'];
 	echo '</div>';
@@ -67,7 +71,9 @@
 		$stmt = $con->prepare("select * from passeggero P
 			where P.prenotazione = ?;");
 		$stmt->bind_param('i', $_POST['idPrenotazione']);
-		$result = $stmt->execute();
+		$stmt->execute();
+		$stmt->store_result();
+		$stmt->get_result($result);
 /*
 		$queryText = "select * from passeggero P
 					where P.prenotazione = " . $_POST['idPrenotazione'] .";";
@@ -95,6 +101,7 @@
 				';
 			}
 		}
+		$stmt->close();
 	}
 ?>
 
