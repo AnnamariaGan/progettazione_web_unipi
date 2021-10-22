@@ -31,8 +31,8 @@
 		$result = $con->query($queryText);
 */		
 		echo '<h1>I TUOI VOLI PRENOTATI</h1>';
-
-			if(mysqli_num_rows($result)==0){
+			
+			if(!$result || mysqli_num_rows($result)==0){
 				echo 'Mi dispiace, ma non hai ancora prenotato nessun volo';
 			} else {  
 				echo '<div id="voliDiv" style="visibility: hidden;"></div>';

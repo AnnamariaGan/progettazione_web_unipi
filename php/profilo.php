@@ -21,8 +21,10 @@
 		$dbUsername = "root";
 		$dbPassword = "";
 		$dbName = "wings";
+		
 		$con = mysqli_connect($dbHostname, $dbUsername, $dbPassword, $dbName);
-		if(mysqli_connect_errno()){
+		
+		if (mysqli_connect_errno() ) {
 			exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 		}
 		
@@ -46,7 +48,7 @@
 						
 		$result = $con->query($queryText);
 */		
-		if(mysqli_num_rows($result)==0){
+		if (!$result || mysqli_num_rows($result)==0) {
 			echo 'Non hai prenotato nessun volo.';
 		} else {  
 			echo '<div class="grid-container">';

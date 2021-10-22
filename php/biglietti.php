@@ -46,7 +46,7 @@
 	$result = $con->query($queryText);
 */
 	//echo $result;
-	if(mysqli_num_rows($result)==0){
+	if(!$result || mysqli_num_rows($result)==0){
 		echo 'Errore, qualcosa è andato storto, riprovare o contattare l\'assistenza.';
 	} else {
 		while ($row = $result->fetch_assoc() ) {
@@ -80,7 +80,7 @@
 		
 		$result = $con->query($queryText);
 */		
-		if(mysqli_num_rows($result) > 0) {
+		if($result && mysqli_num_rows($result) > 0) {
 			while ($row = $result->fetch_assoc() ) {
 				echo '<label>Nome:</label>';
 				echo $row['Nome'];

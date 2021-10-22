@@ -12,7 +12,7 @@
 		
 		$result = $con->query($queryText);
 */		
-		if (mysqli_num_rows($result) > 0) {
+		if ($result && mysqli_num_rows($result) > 0) {
 			while ($row = $result->fetch_assoc() ) {
 				echo $row['Nome'];
 				echo '  ';
