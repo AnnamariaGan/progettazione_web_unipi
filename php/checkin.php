@@ -19,7 +19,7 @@
 		$stmt->bind_param('s', $utente);
 		$stmt->execute();
 		$stmt->store_result();
-		$stmt->get_result($result);
+		$result = $stmt->get_result();
 /*
 		$queryText = "select * from prenotazioni P 
 					inner join volo V on V.idVolo = P.volo

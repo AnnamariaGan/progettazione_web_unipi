@@ -35,7 +35,7 @@
 		$stmt->bind_param('s', $_SESSION['mail']);
 		$stmt->execute();
 		$stmt->store_result();
-		$stmt->get_result($result);
+		$result = $stmt->get_result();
 /*
 		$queryText = "select * from volo V 
 					inner join rotta R on V.Rotta = R.idRotta 

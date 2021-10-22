@@ -36,7 +36,7 @@
 	$stmt->bind_param('i', $_POST['idPrenotazione']);
 	$stmt->execute();
 	$stmt->store_result();
-	$stmt->get_result($result);
+	$result = $stmt->get_result();
 /*
 	$queryText = "select * from prenotazioni P 
 				inner join volo V on V.idVolo = P.volo
@@ -73,7 +73,7 @@
 		$stmt->bind_param('i', $_POST['idPrenotazione']);
 		$stmt->execute();
 		$stmt->store_result();
-		$stmt->get_result($result);
+		$result = $stmt->get_result();
 /*
 		$queryText = "select * from passeggero P
 					where P.prenotazione = " . $_POST['idPrenotazione'] .";";
