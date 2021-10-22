@@ -97,7 +97,7 @@
 
 		echo '<h1>VOLI DI '.$tipo_volo.'</h1>';
 
-		if(mysqli_num_rows($result)==0){
+		if(!$result || mysqli_num_rows($result)==0){
 			echo 'Mi dispiace, ma non abbiamo trovato 
 			nessun volo con queste caratteristiche';
 		} else {  
