@@ -67,276 +67,113 @@
     }
 	setcookie('numero', $numero);
 	
-
 	echo '<div id="numero-Adulti" style="visibility: hidden;">'.$adulti.'</div>';
 	echo '<div id="numero-Bambini" style="visibility: hidden;">'.$bambini.'</div>';
 
-	if(isset($tipo_viaggio, $partenza, $destinazione, $dataPartenza, $adulti) && $tipo_viaggio == "a") {
-			$stmt = $con->prepare("select * from volo V 
-				inner join rotta R on V.Rotta = R.idRotta 
-				where R.Partenza = ?
-					and R.Destinazione = ?
-					and V.Data = ?;");
-			$stmt->bind_param('sss', $partenza, $destinazione, $dataPartenza);
-			$result = $stmt->execute();
-/*
-			$queryText = "select * from volo V 
-						inner join rotta R on V.Rotta = R.idRotta 
-						where R.Partenza= '".$partenza."'
-						and R.Destinazione='".$destinazione."'
-						and V.Data='".$dataPartenza."';" ;
-						
-			$result = $con->query($queryText);
-*/			
-			echo '<h1>VOLI DI ANDATA</h1>';
-			if(mysqli_num_rows($result)==0){
-				echo 'Mi dispiace, ma non abbiamo trovato 
-				nessun volo con queste caratteristiche';
-			} else {  
-
-				echo '<div class="grid-container">';
-
-				echo '<div class="grid-row">';
-
-				echo '<div class="grid-item">';
-				echo 'Partenza';
-				echo '</div>';
-
-				echo '<div class="grid-item">';
-				echo 'Destinazione';
-				echo '</div>';
-
-				echo '<div class="grid-item">';
-				echo 'Ora partenza';
-				echo '</div>';
-
-				echo '<div class="grid-item">';
-				echo 'Prezzo €';
-				echo '</div>';
-
-				echo '<div class="grid-item">';
-				echo 'Posti disponibili';
-				echo '</div>';
-
-				echo '</div>';
-				
-				while ($row = $result->fetch_assoc() ) {
-				// TO DO: refactor as function	
-					$postiLiberi = 250 - $row["PostiOccupati"];
-					if($postiLiberi < ($adulti + $bambini)){
-						echo 'Mi dispiace, non ci sono altri 
-						posti disponibili per questo volo';
-					} else {
-						$thereareflies = true;
-					}
-//TO DO: AGGIUNGI UN ELSE anche nelle altre parti <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-					echo '<div class="grid-row" onclick="rowClick(';
-					echo $row['idVolo'].');" id="row-'.$row['idVolo'].'">';
-
-					echo '<div class="grid-item">';
-					echo $row['Partenza'];
-					echo '</div>';
-				
-					echo '<div class="grid-item">';
-					echo $row['Destinazione'];
-					echo '</div>';
-				
-					echo '<div class="grid-item">';
-					echo $row['Ora'];
-					echo '</div>';
-				
-					echo '<div class="grid-item" id="pA-'.$row['idVolo'].'">';
-					echo $row['Costo'];
-					echo '</div>';
-				
-					echo '<div class="grid-item">';
-					echo $postiLiberi;
-					echo '</div>';
-
-					echo '</div>';
-
-				}
-
-				echo '</div>';
-			}
-	}
-	// TO DO: refactor merging the two if	
-	//andata e ritorno
-	if(isset($tipo_viaggio) && $tipo_viaggio == "r"){
-		if (isset( $partenza, $destinazione, $dataPartenza)  ) {
-			$stmt = $con->prepare("select * from volo V 
-				inner join rotta R on V.Rotta = R.idRotta 
-				where R.Partenza = ?
-					and R.Destinazione = ?
-					and V.Data = ?;");
-			$stmt->bind_param('sss', $partenza, $destinazione, $dataPartenza);
-			$result = $stmt->execute();
-	/*
-			$queryText = "select * from volo V 
-						inner join rotta R on V.Rotta = R.idRotta 
-						where R.Partenza= '".$partenza."'
-						and R.Destinazione='".$destinazione."'
-						and V.Data='".$dataPartenza."';" ;
-			
-			$result = $con->query($queryText);
-	*/
-			echo '<h1>VOLI DI ANDATA</h1>';
-			if(mysqli_num_rows($result)==0){
-				echo 'Mi dispiace, ma non abbiamo trovato 
-				nessun volo.';
-			} else {
-				echo '<div class="grid-container">';
-
-					echo '<div class="grid-row">';
-
-						echo '<div class="grid-item">';
-						echo 'Partenza';
-						echo '</div>';
-
-						echo '<div class="grid-item">';
-						echo 'Destinazione';
-						echo '</div>';
-
-						echo '<div class="grid-item">';
-						echo 'Ora partenza';
-						echo '</div>';
-
-						echo '<div class="grid-item">';
-						echo 'Prezzo €';
-						echo '</div>';
-
-						echo '<div class="grid-item">';
-						echo 'Posti disponibili';
-						echo '</div>';
-
-					echo '</div>';
-
-				while ($row = $result->fetch_assoc() ) {
-					$postiLiberi = 250 - $row["PostiOccupati"];
-
-					if($postiLiberi < ($adulti + $bambini)){
-						echo 'Mi dispiace, non ci sono altri 
-						posti disponibili per questo volo';
-					} else {
-						$thereareflies = true;
-					}
-
-					echo '<div class="grid-row" onclick="rowClickAndata(';
-					echo $row['idVolo'].');" id="row-'.$row['idVolo'].'">';
-
-					echo '<div class="grid-item">';
-					echo $row['Partenza'];
-					echo '</div>';
-
-					echo '<div class="grid-item">';
-					echo $row['Destinazione'];
-					echo '</div>';
-
-					echo '<div class="grid-item">';
-					echo $row['Ora'];
-					echo '</div>';
-
-					echo '<div class="grid-item" id="pA-'.$row['idVolo'].'">';
-					echo $row['Costo'];
-					echo '</div>';
-
-					echo '<div class="grid-item">';
-					echo $postiLiberi;
-					echo '</div>';
-
-					echo '</div>';
-				}
-			
-				echo '</div>';
-			}
+	function tableUtility($tipo_volo, $rowClickString, $partenza, $destinazione, $dataPartenza, $adulti) {
+		if(isset($tipo_volo, $partenza, $destinazione, $dataPartenza, $adulti) ) {
+			return;
 		}
-	}
-			
-		if(isset($partenza, $destinazione, $dataRitorno, $tipo_viaggio)
-		 && $tipo_viaggio == 'r'){
-			$stmt = $con->prepare("select * from volo V 
+		$partenzaUtil = 'Partenza';
+		$destinazioneUtil = 'Destinazione';
+		
+		if ($tipo_volo == 'RITORNO') {
+			$partenzaUtil = 'Destinazione';
+			$destinazioneUtil = 'Partenza';
+		} else if ($tipo_volo != 'ANDATA') {
+			return;
+		}
+		
+		$stmt = $con->prepare("select * from volo V 
 			inner join rotta R on V.Rotta = R.idRotta 
 			where R.Partenza = ?
 				and R.Destinazione = ?
 				and V.Data = ?;");
-			$stmt->bind_param('sss', $partenza, $destinazione, $dataPartenza);
-			$result = $stmt->execute();
-	/*
-			$queryText = "select * from volo V 
-						inner join rotta R on V.Rotta = R.idRotta 
-						where R.Partenza= '".$destinazione."'
-						and R.Destinazione='".$partenza."'
-						and V.Data='".$dataRitorno."';" ;
+
+		$stmt->bind_param('sss', $partenza, $destinazione, $dataPartenza);
+		$result = $stmt->execute();
+
+		echo '<h1>VOLI DI '.$tipo_volo.'</h1>';
+
+		if(mysqli_num_rows($result)==0){
+			echo 'Mi dispiace, ma non abbiamo trovato 
+			nessun volo con queste caratteristiche';
+		} else {  
+
+			echo '<div class="grid-container">';
+
+			echo '<div class="grid-row">';
+
+			echo '<div class="grid-item">';
+			echo 'Partenza';
+			echo '</div>';
+
+			echo '<div class="grid-item">';
+			echo 'Destinazione';
+			echo '</div>';
+
+			echo '<div class="grid-item">';
+			echo 'Ora partenza';
+			echo '</div>';
+
+			echo '<div class="grid-item">';
+			echo 'Prezzo €';
+			echo '</div>';
+
+			echo '<div class="grid-item">';
+			echo 'Posti disponibili';
+			echo '</div>';
+
+			echo '</div>';
 			
-			$result = $con->query($queryText);
-	*/
-			echo '<h1>VOLI DI RITORNO</h1>';
-			if(mysqli_num_rows($result)==0){
-				echo 'Mi dispiace, ma non abbiamo trovato 
-				nessun volo.';
-			}else{
+			while ($row = $result->fetch_assoc() ) {
 
-				echo '<div class="grid-container">';
-					echo '<div class="grid-row">';
-
-						echo '<div class="grid-item">';
-						echo 'Partenza';
-						echo '</div>';
-
-						echo '<div class="grid-item">';
-						echo 'Destinazione';
-						echo '</div>';
-
-						echo '<div class="grid-item">';
-						echo 'Ora partenza';
-						echo '</div>';
-
-						echo '<div class="grid-item">';
-						echo 'Prezzo €';
-						echo '</div>';
-
-						echo '<div class="grid-item">';
-						echo 'Posti disponibili';
-						echo '</div>';
-						
-					echo '</div>';
-
-				while ($row = $result->fetch_assoc() ) {
-					$postiLiberi = 250 - $row["PostiOccupati"];
-					if($postiLiberi < ($adulti + $bambini)){
-						echo 'Mi dispiace, non ci sono altri 
-						posti disponibili per questo volo';
-					} else {
-						$thereareflies = true;
-					}
-					echo '<div class="grid-row" onclick="rowClickRitorno(';
-						echo $row['idVolo'].');" id="row-'.$row['idVolo'].'">';
-
-						echo '<div class="grid-item">';
-						echo $row['Destinazione'];
-						echo '</div>';
-
-						echo '<div class="grid-item">';
-						echo $row['Partenza'];
-						echo '</div>';
-
-						echo '<div class="grid-item">';
-						echo $row['Ora'];
-						echo '</div>';
-
-						echo '<div class="grid-item" id="pR-'.$row['idVolo'].'">';
-						echo $row['Costo'];
-						echo '</div>';
-
-						echo '<div class="grid-item">';
-						echo $postiLiberi;
-						echo '</div>';
-
-					echo '</div>';
+				$postiLiberi = 250 - $row["PostiOccupati"];
+				if($postiLiberi < ($adulti + $bambini)){
+					echo 'Mi dispiace, non ci sono altri 
+					posti disponibili per questo volo';
+				} else {
+					$thereareflies = true;
 				}
+
+				echo '<div class="grid-row" onclick="'.$rowClickString.'(';
+				echo $row['idVolo'].');" id="row-'.$row['idVolo'].'">';
+
+				echo '<div class="grid-item">';
+				echo $row[$partenzaUtil];
 				echo '</div>';
-			}	
+			
+				echo '<div class="grid-item">';
+				echo $row[$destinazioneUtil];
+				echo '</div>';
+			
+				echo '<div class="grid-item">';
+				echo $row['Ora'];
+				echo '</div>';
+			
+				echo '<div class="grid-item" id="pA-'.$row['idVolo'].'">';
+				echo $row['Costo'];
+				echo '</div>';
+			
+				echo '<div class="grid-item">';
+				echo $postiLiberi;
+				echo '</div>';
+
+				echo '</div>';
+
+			}
+
+			echo '</div>';
 		}
+		return;
+	}
+	if ($tipo_viaggio == "a") {
+		tableUtility('RITORNO', 'rowClick', $partenza, $destinazione, $dataPartenza, $adulti);
+	} else if ($tipo_viaggio == "r") {
+		tableUtility('RITORNO', 'rowClickAndata', $partenza, $destinazione, $dataPartenza, $adulti);
+		tableUtility('RITORNO', 'rowClickRitorno', $partenza, $destinazione, $dataPartenza, $adulti);
+	}
+
 	utilityButton();
 	
 	$con->close();  
