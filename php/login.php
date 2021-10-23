@@ -10,7 +10,7 @@
 	/***********************************************/
 
 	$mail = $_POST['mail'];
-	$password = $_POST['psw'];//sha1(md5(sha1($_POST['psw'])));  
+	$password = sha1(md5(sha1($_POST['psw'])));  
 
 	$errorMessage = login($mail, $password);
    

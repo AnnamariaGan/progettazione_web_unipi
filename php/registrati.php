@@ -21,8 +21,8 @@
     $nome = $_POST['nome'];
     $cognome = $_POST['cognome'];
 	$email = $_POST['email'];
-    $password1 = $_POST['psw'];//sha1(md5(sha1($_POST['psw'])));  
-    $password2 = $_POST['psw-repeat'];//sha1(md5(sha1($_POST['psw-repeat'])));
+    $password1 = sha1(md5(sha1($_POST['psw'])));  
+    $password2 = sha1(md5(sha1($_POST['psw-repeat'])));
  
 	if(isset($nome, $cognome, $email, $password1, $password2)){
         if($password1 == $password2){

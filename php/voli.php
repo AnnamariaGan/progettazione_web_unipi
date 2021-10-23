@@ -1,4 +1,10 @@
 <?php
+/************************************************/
+	//to do: remove in production
+	ini_set('display_errors',1);
+	ini_set('display_startup_errors',1);
+	error_reporting(E_ALL);
+	/***********************************************/
 	require_once __DIR__ . "/util/config.php"; //define dir e cose
 	session_start();
     include DIR_UTIL . "sessionUtil.php"; //per accedere all account tramite email
@@ -52,28 +58,37 @@
 	$partenza = $_POST['partenza'];
 	$destinazione = $_POST['destinazione'];
 	$dataPartenza = $_POST['data_partenza'];
-	$dataRitorno = $_POST['data_ritorno'];
+
+	$dataRitorno = null;
+	if ($tipo_viaggio == 'r' && isset($_POST['data_ritorno']) ) {
+		$dataRitorno = $_POST['data_ritorno'];
+	}
+
 	$adulti = $_POST['adulti'];
 	$bambini = $_POST['bambini'];
 
 	$numero = 0;
+	
 	if (isset($bambini) ) {
-		echo $bambini;
-        $numero += $bambini;
+        $numero += intval($bambini);
 		setcookie('bambini', $bambini);
     }
+
 	if (isset($adulti) ) {
-        $numero += $adulti;
+        $numero += intval($adulti);
     }
+
 	setcookie('numero', $numero);
 	
 	echo '<div id="numero-Adulti" style="visibility: hidden;">'.$adulti.'</div>';
 	echo '<div id="numero-Bambini" style="visibility: hidden;">'.$bambini.'</div>';
 
-	function tableUtility($tipo_volo, $rowClickString, $partenza, $destinazione, $dataPartenza, $adulti) {
-		if(isset($tipo_volo, $partenza, $destinazione, $dataPartenza, $adulti) ) {
+	function tableUtility($tipo_volo, $rowClickString, $partenzaUtil, $destinazioneUtil, $partenza, $destinazione, $dataPartenza, $adulti, $con) {
+		
+		if(!isset($tipo_volo, $partenza, $destinazione, $dataPartenza, $adulti) ) {
 			return;
 		}
+	/*	
 		$partenzaUtil = 'Partenza';
 		$destinazioneUtil = 'Destinazione';
 		
@@ -83,19 +98,21 @@
 		} else if ($tipo_volo != 'ANDATA') {
 			return;
 		}
-		
+	*/	
 		$stmt = $con->prepare("select * from volo V 
 			inner join rotta R on V.Rotta = R.idRotta 
 			where R.Partenza = ?
 				and R.Destinazione = ?
 				and V.Data = ?;");
-
+		
 		$stmt->bind_param('sss', $partenza, $destinazione, $dataPartenza);
-		$result = $stmt->execute();
-
+		$stmt->execute();
+		$stmt->store_result();
+		$result = $stmt->get_result();
+		
 		echo '<h1>VOLI DI '.$tipo_volo.'</h1>';
 
-		if(mysqli_num_rows($result)==0){
+		if(!$result || mysqli_num_rows($result)==0){
 			echo 'Mi dispiace, ma non abbiamo trovato 
 			nessun volo con queste caratteristiche';
 		} else {  
@@ -165,13 +182,16 @@
 
 			echo '</div>';
 		}
+
+		$stmt->close();
 		return;
 	}
+
 	if ($tipo_viaggio == "a") {
-		tableUtility('RITORNO', 'rowClick', $partenza, $destinazione, $dataPartenza, $adulti);
+		tableUtility('ANDATA', 'rowClick', 'Partenza', 'Destinazione', $partenza, $destinazione, $dataPartenza, $adulti, $con);
 	} else if ($tipo_viaggio == "r") {
-		tableUtility('RITORNO', 'rowClickAndata', $partenza, $destinazione, $dataPartenza, $adulti);
-		tableUtility('RITORNO', 'rowClickRitorno', $partenza, $destinazione, $dataPartenza, $adulti);
+		tableUtility('ANDATA', 'rowClickAndata','Partenza', 'Destinazione', $partenza, $destinazione, $dataPartenza, $adulti, $con);
+		tableUtility('RITORNO', 'rowClickRitorno', 'Destinazione', 'Partenza', $partenza, $destinazione, $dataRitorno, $adulti, $con);
 	}
 
 	utilityButton();

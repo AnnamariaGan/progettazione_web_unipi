@@ -34,7 +34,9 @@
 		inner join rotta R on V.Rotta = R.idRotta
 		where P.id = ?;");
 	$stmt->bind_param('i', $_POST['idPrenotazione']);
-	$result = $stmt->execute();
+	$stmt->execute();
+	$stmt->store_result();
+	$result = $stmt->get_result();
 /*
 	$queryText = "select * from prenotazioni P 
 				inner join volo V on V.idVolo = P.volo
@@ -44,7 +46,7 @@
 	$result = $con->query($queryText);
 */
 	//echo $result;
-	if(mysqli_num_rows($result)==0){
+	if(!$result || mysqli_num_rows($result)==0){
 		echo 'Errore, qualcosa è andato storto, riprovare o contattare l\'assistenza.';
 	} else {
 		while ($row = $result->fetch_assoc() ) {
@@ -59,6 +61,8 @@
 		}
 	}
 
+	$stmt->close();
+
 	echo '<div id="idPrenotazioneDiv" hidden>';
 	echo $_POST['idPrenotazione'];
 	echo '</div>';
@@ -67,14 +71,16 @@
 		$stmt = $con->prepare("select * from passeggero P
 			where P.prenotazione = ?;");
 		$stmt->bind_param('i', $_POST['idPrenotazione']);
-		$result = $stmt->execute();
+		$stmt->execute();
+		$stmt->store_result();
+		$result = $stmt->get_result();
 /*
 		$queryText = "select * from passeggero P
 					where P.prenotazione = " . $_POST['idPrenotazione'] .";";
 		
 		$result = $con->query($queryText);
 */		
-		if(mysqli_num_rows($result) > 0) {
+		if($result && mysqli_num_rows($result) > 0) {
 			while ($row = $result->fetch_assoc() ) {
 				echo '<label>Nome:</label>';
 				echo $row['Nome'];
@@ -95,6 +101,7 @@
 				';
 			}
 		}
+		$stmt->close();
 	}
 ?>
 
