@@ -29,6 +29,7 @@ include DIR_UTIL . "sessionUtil.php";
 		<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" /> 
 		<link href="/gandolfo/css/account.css" rel="stylesheet" type="text/css">
 		<script src="/gandolfo/js/valida.js"></script>
+		<script src="/gandolfo/js/account.js"></script>
 		<title>account</title>
 	</head>
 	
@@ -49,21 +50,23 @@ include DIR_UTIL . "sessionUtil.php";
 		<br>
 		<section id = "accedi">
 			<h1>ACCEDI</h1>
-			<form name = "profilo" action="./login.php" method = "post">
+			
+			<form name = "profilo" id="formAccedi" action="./login.php" method = "post" >
+			<!--onsubmit="acceditUtil('pswA'); return false;"-->
 				<div>
 					<label for="mail"><b>Email</b></label>
-   					<input type="text" id="mail" placeholder="Email" name="mail">
+   					<input type="text" id="mailA" placeholder="Email" name="mail">
 				</div>
     			<div>
 					<label for="psw"><b>Password</b></label>
-   					<input id = "psw"type="password" placeholder="Password" name="psw" required>
+   					<input id = "pswA" type="password" placeholder="Password" name="psw" required>
 				</div>
 				<div>
 					<input type="radio" id="ricordami" name="Ricordami" value="true" checked >
 					<label for = "ricordami">Resta collegato</label>
 				</div>
 				<div>
-					<!-- appena si clicca su accedi si cambia pagina. dobbiamo andare a profilo.php -->
+					<!--cliccando su accedi si cambia pagina. dobbiamo andare a profilo.php -->
      				<button type="submit">Accedi</button>  
 				</div>
 				<div>
@@ -77,9 +80,11 @@ include DIR_UTIL . "sessionUtil.php";
 		<br>
         <section id = "registrati">
 			<h1>REGISTRATI</h1>
-            <form name = "registrati" action="./registrati.php" method = "post"  onChange="onChangeMail();">
+			
+            <form name = "registrati" id="formRegistrati"  method = "post"  onChange="onChangeMail();" action="./registrati.php">
+			<!-- onsubmit="registratiUtil(this,'psw', 'psw-repeat');"-->
 				<div>
-					<label for="nome"><b>Nome</b></label>
+					<label for="	nome"><b>Nome</b></label>
 					<input type="text" placeholder="Nome" name="nome" id="nome" >
 				</div>
 				<div>	

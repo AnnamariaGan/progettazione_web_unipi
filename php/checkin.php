@@ -18,7 +18,6 @@
 			order by V.`Data` DESC, V.`Ora` DESC, P.`check` DESC;");
 		$stmt->bind_param('s', $utente);
 		$stmt->execute();
-		$stmt->store_result();
 		$result = $stmt->get_result();
 /*
 		$queryText = "select * from prenotazioni P 

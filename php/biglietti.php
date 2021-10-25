@@ -35,7 +35,7 @@
 		where P.id = ?;");
 	$stmt->bind_param('i', $_POST['idPrenotazione']);
 	$stmt->execute();
-	$stmt->store_result();
+	
 	$result = $stmt->get_result();
 /*
 	$queryText = "select * from prenotazioni P 
@@ -72,7 +72,6 @@
 			where P.prenotazione = ?;");
 		$stmt->bind_param('i', $_POST['idPrenotazione']);
 		$stmt->execute();
-		$stmt->store_result();
 		$result = $stmt->get_result();
 /*
 		$queryText = "select * from passeggero P
@@ -200,7 +199,7 @@
 		
 			window.addEventListener( "load", function () {
 			function sendData() {
-				
+				console.log("ciao");
 				const XHR = new XMLHttpRequest();
 
 				// Bind the FormData object and the form element
@@ -210,7 +209,6 @@
 				
 				XHR.addEventListener( "load", function(event) {
 
-					form'.$i.'.remove();
 
 					let loadTickets = document.createElement("div");
 					let txt = document.createTextNode(event.target.responseText);
@@ -230,7 +228,7 @@
 						let chkdChildren = parseInt(document.getElementById("checkedChildren").value) + 1;
 						document.getElementById("checkedChildren").value = chkdChildren.toString();
 					}
-
+					form'.$i.'.remove();
 				} );
 				
 

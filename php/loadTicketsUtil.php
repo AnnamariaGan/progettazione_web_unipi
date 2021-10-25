@@ -4,7 +4,6 @@
 		where P.prenotazione = ?;");
 		$stmt->bind_param('i',  $_POST['idPrenotazione']);
 		$stmt->execute();
-		$stmt->store_result();
 		$result = $stmt->get_result();
 /*		
 		$queryText = "select * from passeggero P
