@@ -29,14 +29,14 @@
 		}
 		
 		$stmt = $con->prepare( "select * from volo V 
-		inner join rotta R on V.Rotta = R.idRotta 
-		inner join prenotazioni P on V.idvolo = P.volo
-		where P.utente = ?
-			AND P.`check` < P.`postiPrenotati`
-		order by V.`Data` DESC, V.`Ora` DESC, P.`check` DESC;");
+			inner join rotta R on V.Rotta = R.idRotta 
+			inner join prenotazioni P on V.idvolo = P.volo
+			where P.utente = ?
+				AND P.`check` < P.`postiPrenotati`
+			order by V.`Data` DESC, V.`Ora` DESC, P.`check` DESC;");
 		$stmt->bind_param('s', $_SESSION['mail']);
 		$stmt->execute();
-		$stmt->store_result();
+		//$stmt->store_result();
 		$result = $stmt->get_result();
 /*
 		$queryText = "select * from volo V 
@@ -103,7 +103,7 @@
 				echo '</div>';
 
 				echo '<div class="grid-item">';
-				if ($row['check'] == 'S') {
+				if ($row['check'] == 1){//'S') {
 					echo 'check-in effettuato';
 				} else {
 					echo "<button>FAI CHECK-IN</button>";

@@ -10,8 +10,8 @@
 	/***********************************************/
 
 	$mail = $_POST['mail'];
-	$password = sha1(md5(sha1($_POST['psw'])));  
-
+	$password = sha1(md5(sha1($_POST['psw'])));//$_POST['psw'];  
+    echo $password;
 	$errorMessage = login($mail, $password);
    
 	if (!isset($errorMessage) ) {
@@ -61,8 +61,8 @@
                 where Email = ? and Pass = ?;");
             $stmt->bind_param('ss', $username, $password);
             $stmt->execute();
-            $stmt->store_result();
-            $stmt->bind_result($result);
+            //$stmt->store_result();
+            $result = $stmt->get_result();
 
             //echo $stmt->num_rows;
     /*        
@@ -72,7 +72,7 @@
             
             $result = $con->query($queryText);
     */
-            $numUtenti = $stmt->bind_result($result);//mysqli_num_rows($result);
+            $numUtenti = mysqli_num_rows($result);
             $con->close();
             //alert($ret);
             return $numUtenti;

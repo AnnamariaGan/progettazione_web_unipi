@@ -68,10 +68,10 @@
 
     function loadTickets($con){
 		$stmt = $con->prepare("select * from passeggero P
-		where P.prenotazione = ?;");
+			where P.prenotazione = ?;");
 		$stmt->bind_param('i', $idPrenotazione);
 		$stmt->execute();
-		$stmt->store_result();
+		//$stmt->store_result();
 		$result = $stmt->get_result();
 /*
 		$queryText = "select * from passeggero P

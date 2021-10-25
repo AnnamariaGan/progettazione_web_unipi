@@ -9,7 +9,7 @@
 	session_start();
     include DIR_UTIL . "sessionUtil.php"; //per accedere all account tramite email
 
-	echo'
+	echo '
 	<header class="bar_header">
 			<div id ="header_wrapper" style = "text-align:center">
 				<a href="/gandolfo/index.php"><img src="/gandolfo/images/logo.png" 
@@ -64,8 +64,8 @@
 		$dataRitorno = $_POST['data_ritorno'];
 	}
 
-	$adulti = $_POST['adulti'];
-	$bambini = $_POST['bambini'];
+	$adulti = intval($_POST['adulti']);
+	$bambini = intval($_POST['bambini']);
 
 	$numero = 0;
 	
@@ -83,7 +83,8 @@
 	echo '<div id="numero-Adulti" style="visibility: hidden;">'.$adulti.'</div>';
 	echo '<div id="numero-Bambini" style="visibility: hidden;">'.$bambini.'</div>';
 
-	function tableUtility($tipo_volo, $rowClickString, $partenzaUtil, $destinazioneUtil, $partenza, $destinazione, $dataPartenza, $adulti, $con) {
+	function tableUtility($tipo_volo, $pAR, $rowClickString, $partenzaUtil, $destinazioneUtil, $partenza, $destinazione, $dataPartenza, $adulti, $bambini, $con) {
+		
 		
 		if(!isset($tipo_volo, $partenza, $destinazione, $dataPartenza, $adulti) ) {
 			return;
@@ -107,7 +108,7 @@
 		
 		$stmt->bind_param('sss', $partenza, $destinazione, $dataPartenza);
 		$stmt->execute();
-		$stmt->store_result();
+		//$stmt->store_result();
 		$result = $stmt->get_result();
 		
 		echo '<h1>VOLI DI '.$tipo_volo.'</h1>';
@@ -168,7 +169,7 @@
 				echo $row['Ora'];
 				echo '</div>';
 			
-				echo '<div class="grid-item" id="pA-'.$row['idVolo'].'">';
+				echo '<div class="grid-item" id="'.$pAR.$row['idVolo'].'">';
 				echo $row['Costo'];
 				echo '</div>';
 			
@@ -188,10 +189,10 @@
 	}
 
 	if ($tipo_viaggio == "a") {
-		tableUtility('ANDATA', 'rowClick', 'Partenza', 'Destinazione', $partenza, $destinazione, $dataPartenza, $adulti, $con);
+		tableUtility('ANDATA', 'pA-', 'rowClick', 'Partenza', 'Destinazione', $partenza, $destinazione, $dataPartenza, $adulti, $bambini, $con);
 	} else if ($tipo_viaggio == "r") {
-		tableUtility('ANDATA', 'rowClickAndata','Partenza', 'Destinazione', $partenza, $destinazione, $dataPartenza, $adulti, $con);
-		tableUtility('RITORNO', 'rowClickRitorno', 'Destinazione', 'Partenza', $partenza, $destinazione, $dataRitorno, $adulti, $con);
+		tableUtility('ANDATA', 'pA-', 'rowClickAndata','Partenza', 'Destinazione', $partenza, $destinazione, $dataPartenza, $adulti, $bambini, $con);
+		tableUtility('RITORNO', 'pR-', 'rowClickRitorno', 'Destinazione', 'Partenza', $destinazione, $partenza, $dataRitorno, $adulti, $bambini, $con);
 	}
 
 	utilityButton();

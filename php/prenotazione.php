@@ -60,7 +60,7 @@
                     SET PostiOccupati = PostiOccupati + ?
                     WHERE idVolo = ?;");
                 $stmt->bind_param('ii', $numero, $andata);
-                $stm->execute();
+                $stmt->execute();
 /*
                 $queryText = "UPDATE volo
                     SET PostiOccupati = PostiOccupati + ".$numero."
@@ -112,7 +112,7 @@
                 SET PostiOccupati = PostiOccupati + ?
                 WHERE idVolo = ?;");
                 $stmt->bind_param('ii', $numero, $ritorno);
-                $stm->execute();
+                $stmt->execute();
 /*                
                 $queryText = "UPDATE volo
                     SET PostiOccupati = PostiOccupati + ".$numero."
