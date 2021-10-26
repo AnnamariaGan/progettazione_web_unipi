@@ -29,58 +29,58 @@
 
 				echo '<div class="grid-container">';
 
-				echo '<div class="grid-row">';
+					echo '<div class="grid-row">';
 
-				echo '<div class="grid-item">';
-				echo 'Partenza';
-				echo '</div>';
+						echo '<div class="grid-item">';
+						echo 'Partenza';
+						echo '</div>';
 
-				echo '<div class="grid-item">';
-				echo 'Destinazione';
-				echo '</div>';
+						echo '<div class="grid-item">';
+						echo 'Destinazione';
+						echo '</div>';
 
-				echo '<div class="grid-item">';
-				echo 'Data';
-				echo '</div>';
+						echo '<div class="grid-item">';
+						echo 'Data';
+						echo '</div>';
 
-				echo '<div class="grid-item">';
-				echo 'Posti prenotati';
-				echo '</div>';
+						echo '<div class="grid-item">';
+						echo 'Posti prenotati';
+						echo '</div>';
 
-				echo '<div class="grid-item">';
-				echo 'Check in';
-				echo '</div>';
-				
-				echo '</div>';
+						echo '<div class="grid-item">';
+						echo 'Check in';
+						echo '</div>';
+					
+					echo '</div>';
 				
 				while ($row = $result->fetch_assoc() ) {
 					
-					echo '<div class="grid-row" onclick="rowClick(';
-					echo $row['id'].');" id="row-'.$row['id'].'">';
+						echo '<div class="grid-row" onclick="rowClick(';
+						echo $row['id'].');" id="row-'.$row['id'].'">';
 
-					echo '<div class="grid-item">';
-					echo $row['Partenza'];
-					echo '</div>';
-				
-					echo '<div class="grid-item">';
-					echo $row['Destinazione'];
-					echo '</div>';
-				
-					echo '<div class="grid-item">';
-					echo $row['Data'];
-					echo '
-					'.$row['Ora'];
-					echo '</div>';
+							echo '<div class="grid-item">';
+							echo $row['Partenza'];
+							echo '</div>';
+						
+							echo '<div class="grid-item">';
+							echo $row['Destinazione'];
+							echo '</div>';
+						
+							echo '<div class="grid-item">';
+							echo $row['Data'];
+							echo '
+							'.$row['Ora'];
+							echo '</div>';
 
-					echo '<div class="grid-item">';
-					echo $row['postiPrenotati'];
-					echo '</div>';
-				
-					echo '<div class="grid-item">';
-					echo 'clicca per i biglietti';
-					echo '</div>';
+							echo '<div class="grid-item">';
+							echo $row['postiPrenotati'];
+							echo '</div>';
+						
+							echo '<div class="grid-item">';
+							echo 'clicca per i biglietti';
+							echo '</div>';
 
-					echo '</div>';
+						echo '</div>';
 				}
 
 				echo '</div>';

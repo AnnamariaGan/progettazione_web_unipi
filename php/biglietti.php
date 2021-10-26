@@ -65,9 +65,8 @@
 		$stmt->bind_param('i', $_POST['idPrenotazione']);
 		$stmt->execute();
 		$result = $stmt->get_result();
-		
-		if($result && mysqli_num_rows($result) > 0) {
-			echo '<div class="grid-container">';
+
+		echo '<div class="grid-container" id="grid-biglietti">';
 
 			echo '<div class="grid-row">';
 
@@ -84,6 +83,8 @@
 				echo '</div>';
 
 			echo '</div>';
+			
+		if($result && mysqli_num_rows($result) > 0) {
 			while ($row = $result->fetch_assoc() ) {
 					echo '<div class="grid-row"> ';
 				 
@@ -226,17 +227,23 @@
 				XHR.addEventListener( "load", function(event) {
 
 
-					let loadTickets = document.createElement("div");
-					let txt = document.createTextNode(event.target.responseText);
-					loadTickets.appendChild(txt);
-					/*if (document.getElementById("loadTicketsContainer") != null
-					 && loadTickets != null)*/ 
+					//let loadTickets = document.createElement("div");
+
+					// Recupera array del testo di risposta di checkindbutil
+					const arrayResponse = (event.target.responseText).split(" ");
+
 					try {
-						let u = document.getElementById("loadTicketsContainer"); 
-						u.appendChild(loadTickets);
+					// mostra il biglietto appena inserito
+						// trova la grid
+						const u = document.getElementById("grid-biglietti"); 
+						// aggiungi in coda la row formattata da formatRenspose
+						// in biglietti.js
+						u.append(formatRenspose(arrayResponse));
 					} catch(error) {
 						console.log("codice 000XHR");
 					}
+
+					// aggiorna i valori di riferimento per i check-in adulti/bambini
 					const tipo = document.getElementById("tipoPasseggero-'.$i.'").value;
 					if (tipo == "adulto") {
 						let chkdAdults = parseInt(document.getElementById("checkedAdults").value) + 1;
@@ -245,6 +252,8 @@
 						let chkdChildren = parseInt(document.getElementById("checkedChildren").value) + 1;
 						document.getElementById("checkedChildren").value = chkdChildren.toString();
 					}
+					
+					// rimuovi il form precedentemente utilizzato
 					form'.$i.'.remove();
 				} );
 				
@@ -282,4 +291,6 @@
 	<?php
 		$con->close();
 	?>
+
+
 </html>
