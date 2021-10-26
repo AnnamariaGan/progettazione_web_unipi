@@ -9,15 +9,6 @@ require_once __DIR__ . "/util/config.php";
 session_start();
 include DIR_UTIL . "sessionUtil.php";
 
-//	session_start();
-//	require_once __DIR__. "./config.php"; 
-	
-//	include DIR_UTIL . "sessionUtil.php"; 
-//	if ( isLogged() ){
-//		header( 'Location: ./php/homeLatest.php');  //ultima pagina lasciata
-//		exit;
-//	}
-//	echo __DIR__;
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +42,6 @@ include DIR_UTIL . "sessionUtil.php";
 			<h1>ACCEDI</h1>
 			
 			<form name = "profilo" id="formAccedi" action="./login.php" method = "post" >
-			<!--onsubmit="acceditUtil('pswA'); return false;"-->
 				<div>
 					<label for="mail"><b>Email</b></label>
    					<input type="text" id="mailA" placeholder="Email" name="mail">
@@ -60,17 +50,8 @@ include DIR_UTIL . "sessionUtil.php";
 					<label for="psw"><b>Password</b></label>
    					<input id = "pswA" type="password" placeholder="Password" name="psw" required>
 				</div>
-				<!--div>
-					<input type="radio" id="ricordami" name="Ricordami" value="true" checked >
-					<label for = "ricordami">Resta collegato</label>
-				</div-->
 				<div>
-					<!--cliccando su accedi si cambia pagina. dobbiamo andare a profilo.php -->
      				<button type="submit">Accedi</button>  
-				</div>
-				<div>
-				<!--	<span class="psw">Hai dimenticato la <a href="#">password?</a></span> -->
-					<!-- inserire pop up per cambiare la password, oppure non lo fare proprio-->
 				</div>
 			</form>
 		</section>
@@ -81,7 +62,6 @@ include DIR_UTIL . "sessionUtil.php";
 			<h1>REGISTRATI</h1>
 			
             <form name = "registrati" id="formRegistrati"  method = "post"  onChange="onChangeMail();" action="./registrati.php">
-			<!-- onsubmit="registratiUtil(this,'psw', 'psw-repeat');"-->
 				<div>
 					<label for="	nome"><b>Nome</b></label>
 					<input type="text" placeholder="Nome" name="nome" id="nome" >

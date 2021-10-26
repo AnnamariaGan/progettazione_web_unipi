@@ -96,3 +96,58 @@ function firstLoadPasseggeri() {
     for (let i = adultsNum; i < tot; i++)
         insertPasseggero(i, "bambino");
 }
+
+function formatRenspose(arrayTexts) {
+    try {
+        const nome = arrayTexts[0];
+        const cognome = arrayTexts[1];
+        const documento = arrayTexts[2];
+        const id = arrayTexts[3];
+        const ageClass = arrayTexts[4];
+    
+        // Crea la grid row
+        const gridrow = document.createElement("div");
+        gridrow.className = "grid-row";
+
+        function addItemUtil(tipo, gridrow) {
+            // crea grid cell
+            const item = document.createElement("div");
+            item.className = "grid-item";
+            // aggiungi contenuto cella
+            item.appendChild(document.createTextNode(tipo));
+            // aggiungi item alla row
+            gridrow.appendChild(item);
+        }
+
+        addItemUtil(nome+" "+cognome, gridrow);
+        addItemUtil(documento, gridrow);
+        addItemUtil(id+"\n"+ageClass, gridrow);
+
+        return gridrow;
+        
+        /*
+                echo '<div class="grid-item">';
+                    echo $nome.' '.$cognome;
+                echo '</div>';
+
+                echo '<div class="grid-item">';
+                    echo $documento;
+                echo '</div>';
+            
+                echo '<div class="grid-item">';
+                    echo md5($idPrenotazione);
+                    if ($bambino == 1) {
+                        echo '<br> bambino';
+                    } else {
+                        echo '<br> adulto';
+                    }
+                echo '</div>';
+            
+            echo '</div>';
+        */
+    } catch (error) {
+        console.error("Sembra che ci siano dati mancanti effettuando il check-in!");
+    }
+}
+
+

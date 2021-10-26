@@ -15,10 +15,7 @@
             alert('Accedi al tuo profilo per effettuare la prenotazione');
 		    exit;
     }
-    /*echo $_POST['andataDiv'];
-    if (is_array($_POST['andataDiv']) ) {
-        echo "sì";
-    }*/
+    
     if (isset($_POST['andataDiv']) ) {
         if(is_array($_POST['andataDiv'])) {
             $i = 0;
@@ -33,7 +30,7 @@
             setcookie('andataDiv', $_POST['andataDiv']);
         }
     }
-    //echo $_POST['ritornoDiv'];
+    
     if (isset($_POST['ritornoDiv']) ) {
         if(is_array($_POST['andataDiv'])) {
             $i = 0;

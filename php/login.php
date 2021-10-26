@@ -25,10 +25,8 @@
 	function login($username, $password){   
 		if (isset($username, $password) ) {
 			$users = authenticate($username, $password);
-            //echo $users;
-            //alert($users);
-    		if (/*intval*/($users) > 0){
-                //echo $users;
+            
+    		if (($users) > 0){
     			session_start();
     			setSession($username, $password);
     			return null;
@@ -61,20 +59,10 @@
                 where Email = ? and Pass = ?;");
             $stmt->bind_param('ss', $username, $password);
             $stmt->execute();
-            //$stmt->store_result();
             $result = $stmt->get_result();
 
-            //echo $stmt->num_rows;
-    /*        
-            $queryText = "select * 
-                        from utente
-                        where Email = '".$username."' and Pass = '".$password."';" ;
-            
-            $result = $con->query($queryText);
-    */
             $numUtenti = mysqli_num_rows($result);
             $con->close();
-            //alert($ret);
             return $numUtenti;
         } else {
             echo '<script type="text/javascript"></script>' ;

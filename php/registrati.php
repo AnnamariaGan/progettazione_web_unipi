@@ -36,16 +36,8 @@
                 WHERE Email = ?;");
             $stmt->bind_param("s", $_POST['email']);
             $stmt->execute();
-            //$stmt->store_result();
-            //$stmt->bind_result($result);
             $result = $stmt->get_result();
-            //$count = mysqli_num_rows($result);
-            /* fetch values */
-            /*
-            while ($stmt->fetch()) {
-
-            }
-            */
+            
             $stmt->close();
             
             if ($result->num_rows >0) {
@@ -58,13 +50,7 @@
                     echo "Benvenuto nel nostro team! Ora puoi effettuare l'accesso dalla home page";
                 } else {
                     echo "Registrazione fallita!";
-                }
-    /*
-                $queryText = " INSERT INTO utente (Nome, Cognome, Email , Pass )
-                        VALUES('".$nome."', '".$cognome."', '".$email."', '".$password1."');";
-                
-                $stmt = $con->query($queryText);
-    */      
+                }    
             }
 
         } else {

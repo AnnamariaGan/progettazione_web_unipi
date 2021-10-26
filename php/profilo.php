@@ -137,16 +137,6 @@
 		</section>
 
         <h1>Benvenuto nella tua area personale</h1>
-		<!-- sezione viaggi non serve -->
-	<!--	<section id = "viaggi">
-			<h2>I miei viaggi</h2>
-			<?php
-				//se non ci sono viaggi dire: non hai prenotato nessun viaggio.
-				//torna alla homepage e prenota un volo
-
-				//caricare dal db i viaggi di tizio loggato in una tabella
-			?>
-		</section>  -->
 		<br>
 		<hr  noshade>
 		<br>

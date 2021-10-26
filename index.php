@@ -31,7 +31,7 @@
 		</section>
 		
 		<section id = "searchVolo">
-			<form id = "cerca_volo" method="post" > <!-- centrare questa sezione -->
+			<form id = "cerca_volo" method="post" > 
 				<h2> <img src="images/aereo_stilizzato.jpg" alt="aereo" style="width:8%;"> VOLI</h2> 
 			
 				<input type="radio"  id = "andata" name="tipo_viaggio" value="a" onChange = "onChangeAndata()">
@@ -52,11 +52,10 @@
 				<input type="text" id="destinazione" list="destinazioni" name="destinazione"><br>
 					<datalist id='destinazioni'></datalist>
 
-				<!--<i style='font-size:24px' class='fas'>&#xf073;</i>  -->
+				
 				<label for="data_partenza">Data di partenza:</label>
 				<input type="date" id="data_partenza" name="data_partenza" onChange="onChangePartenza()"/>
 
-				<!--<i style='font-size:24px' class='fas'>&#xf073;</i> -->
 				<label for="data_ritorno">Data di ritorno:</label>
 				<input type="date" id="data_ritorno" name="data_ritorno" onChange="onChangeRitorno()"/><br>
 
@@ -120,9 +119,3 @@
 	</body>
 	
 </html>
-
-
-<!-- da index.php vado nelle pagine previste dal menu   
-	
-	premendo CERCA VOLO -> controllo i campi del form e vado alla pagina voli.php
--->
