@@ -37,15 +37,7 @@
 	$stmt->execute();
 	
 	$result = $stmt->get_result();
-/*
-	$queryText = "select * from prenotazioni P 
-				inner join volo V on V.idVolo = P.volo
-				inner join rotta R on V.Rotta = R.idRotta
-				where P.id = " . $_POST['idPrenotazione'] .";";
-	
-	$result = $con->query($queryText);
-*/
-	//echo $result;
+
 	if(!$result || mysqli_num_rows($result)==0){
 		echo 'Errore, qualcosa è andato storto, riprovare o contattare l\'assistenza.';
 	} else {
@@ -73,13 +65,6 @@
 		$stmt->bind_param('i', $_POST['idPrenotazione']);
 		$stmt->execute();
 		$result = $stmt->get_result();
-/*
-		$queryText = "select * from passeggero P
-					where P.prenotazione = " . $_POST['idPrenotazione'] .";";
-		
-		$result = $con->query($queryText);
-*/		
-
 		
 		if($result && mysqli_num_rows($result) > 0) {
 			echo '<div class="grid-container">';
@@ -135,8 +120,6 @@
 		<meta name = "author" content = "progetto">
 		<meta name = "keywords" content = "sito">
 		<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" /> 
-		<!-- voli.css da aggiustare nel caso-->
-		<!-- css grid , questo non ricordo a cosa si riferisce--> 
 		<link href="./../css/biglietti.css" rel="stylesheet" type="text/css">
 		<title>voli</title>
 		
@@ -198,16 +181,6 @@
 			</div>
 		</div>
 
-		
-
-		
-		<?php
-			/*
-			echo '<input id="totalRequested" type="number" value="';
-			echo ($adulti + $bambini);
-			echo '" hidden>';
-			*/
-		?>
 		<?php
 			echo '<input id="adultRequested" type="number" value="';
 			echo $adulti;
@@ -228,11 +201,7 @@
 			echo $checkedChildren;
 			echo '" hidden>';
 		?> 
-			
-
-		<!-- div id="ticketList"-->
-		
-		
+				
     </body>
 	
 	<script src="../js/ajax/bigliettiCheck.js"></script>
@@ -245,17 +214,14 @@
 		
 		echo '
 		<script>
-
-		
 			window.addEventListener( "load", function () {
 			function sendData() {
-				console.log("ciao");
+				
 				const XHR = new XMLHttpRequest();
 
-				// Bind the FormData object and the form element
 				const FD = new FormData( form'.$i.' );
 
-				// Define what happens on successful data submission
+				// Eseguito in caso di submit andato a buon fine
 				
 				XHR.addEventListener( "load", function(event) {
 
@@ -264,11 +230,12 @@
 					let txt = document.createTextNode(event.target.responseText);
 					loadTickets.appendChild(txt);
 					/*if (document.getElementById("loadTicketsContainer") != null
-					 && loadTickets != null)*/ try {
+					 && loadTickets != null)*/ 
+					try {
 						let u = document.getElementById("loadTicketsContainer"); 
 						u.appendChild(loadTickets);
 					} catch(error) {
-						console.log("codice 000");
+						console.log("codice 000XHR");
 					}
 					const tipo = document.getElementById("tipoPasseggero-'.$i.'").value;
 					if (tipo == "adulto") {
@@ -282,24 +249,23 @@
 				} );
 				
 
-				// Define what happens in case of error
-				XHR.addEventListener( "error", function( event ) {
-				alert( "Oops! Something went wrong." );
+				// Eseguito in caso di errore del submit
+				XHR.addEventListener("error", function( event ) {
+					alert( "Oops! Something went wrong." );
 				} );
 
-				// Set up our request
+				// Imposta la richiesta post
 				XHR.open( "POST", "./checkindbutil.php" );
 
-				// The data sent is what the user provided in the form
-				XHR.send( FD );
+				// I dati inviati sono quelli forniti da utente nel rom
+				XHR.send(FD);
 			}
 
-				// Access the form element...
+				// Accedi il form
 				const form'.$i.'= document.getElementById( "passeggero-'.$i.'" );
 
-				if(document.getElementById( "passeggero-'.$i.'" ) != null ) 
-		{
-				// ...and take over its submit event.
+				if(document.getElementById( "passeggero-'.$i.'" ) != null ) {
+				// controlla il suo submit
 				form'.$i.'.addEventListener( "submit", function ( event ) {
 					event.preventDefault();
 

@@ -31,12 +31,6 @@
 
 				echo '<div class="grid-row">';
 
-				/*
-				echo '<div class="grid-item">';
-				echo 'rotta';
-				echo '</div>';
-				*/
-
 				echo '<div class="grid-item">';
 				echo 'Partenza';
 				echo '</div>';

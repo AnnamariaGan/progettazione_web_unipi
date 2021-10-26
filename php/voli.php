@@ -5,10 +5,11 @@
 	ini_set('display_startup_errors',1);
 	error_reporting(E_ALL);
 	/***********************************************/
-	require_once __DIR__ . "/util/config.php"; //define dir e cose
+	//define dir e cose
+	require_once __DIR__ . "/util/config.php";
 	session_start();
-    include DIR_UTIL . "sessionUtil.php"; //per accedere all account tramite email
-
+	//per accedere all account tramite email
+    include DIR_UTIL . "sessionUtil.php";
 	echo '
 	<header class="bar_header">
 			<div id ="header_wrapper" style = "text-align:center">
@@ -17,26 +18,18 @@
 			</div>
 	</header>
 	';
-	include('./layout/intestazione.php');  // logo e barra menu
+	// logo e barra menu
+	include('./layout/intestazione.php');
 	
 	function utilityButton() {
 		echo '<section id = "importo">
 			<h5>TOTALE </h5>
-			<h5 id="importoTotale"></h5>  
-			<!-- l importomi pare che lo mostrava gia, anche moltiplicato al
-			 numero di biglietti -->
+			<h5 id="importoTotale"></h5>
 		</section>
 
 		<section id = "acquista">	
-			<!-- prenota volo, fa fare il pagamento al tizio, ma deve dargli pure i voli selezionati che
-			poi paga insierisce i voli nel database
-			-->
-
-			<!-- to do: disattivare il pulsante se non ci sono voli,
-			 o se nessun volo e stato selezionato-->
+			
 			<form id="prenotaForm" action = "./pagamento.php"  method = "post">
-				<!-- input id="andataDiv[]" type="hidden" name="andataDiv" value="" / -->
-				<!-- input id="ritornoDiv[]" type="hidden" name="ritornoDiv" value="" / -->
 														
 				<input id="button" type="submit" disabled="true" value="PRENOTA VOLO"/>   
 			</form>
@@ -89,17 +82,7 @@
 		if(!isset($tipo_volo, $partenza, $destinazione, $dataPartenza, $adulti) ) {
 			return;
 		}
-	/*	
-		$partenzaUtil = 'Partenza';
-		$destinazioneUtil = 'Destinazione';
 		
-		if ($tipo_volo == 'RITORNO') {
-			$partenzaUtil = 'Destinazione';
-			$destinazioneUtil = 'Partenza';
-		} else if ($tipo_volo != 'ANDATA') {
-			return;
-		}
-	*/	
 		$stmt = $con->prepare("select * from volo V 
 			inner join rotta R on V.Rotta = R.idRotta 
 			where R.Partenza = ?
@@ -108,7 +91,7 @@
 		
 		$stmt->bind_param('sss', $partenza, $destinazione, $dataPartenza);
 		$stmt->execute();
-		//$stmt->store_result();
+		
 		$result = $stmt->get_result();
 		
 		echo '<h1>VOLI DI '.$tipo_volo.'</h1>';

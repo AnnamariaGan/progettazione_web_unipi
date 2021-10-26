@@ -33,12 +33,6 @@
 				WHERE id = ?;");
 			$stmt2->bind_param('i', $idPrenotazione);
 			$stmt2->execute();
-/*
-			$query2 = "UPDATE prenotazioni
-				SET `checkChildren` = `checkChildren` + 1
-				WHERE id = ".$idPrenotazione.";";
-			$stmt2 = $con->query($query2);
-*/
 		} else {
 			echo 'adulto';
 		}
@@ -48,12 +42,6 @@
 				WHERE id = ?;");
 		$stmt2->bind_param('i', $idPrenotazione);
 		$stmt2->execute();
-/*
-		$query2 = "UPDATE prenotazioni
-			SET `check` = `check` + 1
-			WHERE id = ".$idPrenotazione.";";
-		$stmt2 = $con->query($query2);
-*/
 	}
 
     function loadTickets($con){
@@ -61,14 +49,8 @@
 			where P.prenotazione = ?;");
 		$stmt->bind_param('i', $idPrenotazione);
 		$stmt->execute();
-		//$stmt->store_result();
 		$result = $stmt->get_result();
-/*
-		$queryText = "select * from passeggero P
-					where P.prenotazione = " . $idPrenotazione .";";
-		
-		$result = $con->query($queryText);
-*/		
+
 		if($result && mysqli_num_rows($result) > 0) {
 			while ($row = $result->fetch_assoc() ) {
 				echo $row['Nome'];
@@ -84,10 +66,5 @@
 		}
 	}
 
+	$con->close();
 ?>   
-
-
-
-<?php
-    $con->close();
-?>
