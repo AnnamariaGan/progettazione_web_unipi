@@ -19,16 +19,7 @@
 		$stmt->bind_param('s', $utente);
 		$stmt->execute();
 		$result = $stmt->get_result();
-/*
-		$queryText = "select * from prenotazioni P 
-					inner join volo V on V.idVolo = P.volo
-					inner join rotta R on V.Rotta = R.idRotta
-					where P.utente = '$utente' 
-						and P.`check` >= P.`postiPrenotati`
-					order by V.`Data` DESC, V.`Ora` DESC, P.`check` DESC;" ;
-			
-		$result = $con->query($queryText);
-*/		
+		
 		echo '<h1>I TUOI VOLI PRENOTATI</h1>';
 			
 			if(!$result || mysqli_num_rows($result)==0){
@@ -59,7 +50,7 @@
 				echo '</div>';
 
 				echo '<div class="grid-item">';
-				echo 'Ora';
+				echo 'Posti prenotati';
 				echo '</div>';
 
 				echo '<div class="grid-item">';
@@ -83,14 +74,16 @@
 				
 					echo '<div class="grid-item">';
 					echo $row['Data'];
+					echo '
+					'.$row['Ora'];
 					echo '</div>';
-				
-					echo '<div class="grid-item" id="pA-'.$row['id'].'">';
-					echo $row['Ora'];
+
+					echo '<div class="grid-item">';
+					echo $row['postiPrenotati'];
 					echo '</div>';
 				
 					echo '<div class="grid-item">';
-					echo 'Check in ok, clicca per i biglietti';
+					echo 'clicca per i biglietti';
 					echo '</div>';
 
 					echo '</div>';

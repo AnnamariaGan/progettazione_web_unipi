@@ -79,26 +79,50 @@
 		
 		$result = $con->query($queryText);
 */		
+
+		
 		if($result && mysqli_num_rows($result) > 0) {
+			echo '<div class="grid-container">';
+
+			echo '<div class="grid-row">';
+
+				echo '<div class="grid-item">';
+					echo 'Nome';
+				echo '</div>';
+
+				echo '<div class="grid-item">';
+					echo 'Documento';
+				echo '</div>';
+
+				echo '<div class="grid-item">';
+					echo 'codice unico identificativo';
+				echo '</div>';
+
+			echo '</div>';
 			while ($row = $result->fetch_assoc() ) {
-				echo '<label>Nome:</label>';
-				echo $row['Nome'];
-				echo '  ';
-				echo '<label>Cognome:</label>';
-				echo $row['Cognome'];
-				echo '  ';
-				echo '<label>Documento:</label>';
-				echo $row['Documento'];
-				echo '  ';
-				if ($row['bambino'] == 1) {
-					echo 'bambino';
-				} else {
-					echo 'adulto';
-				}
-				echo '
-				<br>
-				';
+					echo '<div class="grid-row"> ';
+				 
+						echo '<div class="grid-item">';
+							echo $row['Nome'].' '.$row['Cognome'];
+						echo '</div>';
+
+						echo '<div class="grid-item">';
+							echo $row['Documento'];
+						echo '</div>';
+					
+						echo '<div class="grid-item">';
+							echo md5($row['id']);
+							if ($row['bambino'] == 1) {
+								echo '<br> bambino';
+							} else {
+								echo '<br> adulto';
+							}
+						echo '</div>';
+					
+					echo '</div>';
 			}
+			echo '</div>';
+			echo '<hr/><br/>';
 		}
 		$stmt->close();
 	}
@@ -113,30 +137,56 @@
 		<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" /> 
 		<!-- voli.css da aggiustare nel caso-->
 		<!-- css grid , questo non ricordo a cosa si riferisce--> 
-		<link href="./../css/voli.css" rel="stylesheet" type="text/css">
+		<link href="./../css/biglietti.css" rel="stylesheet" type="text/css">
 		<title>voli</title>
 		
 	</head>
 	
 	<body onload="firstLoadPasseggeri();">
-	    <!-- devo creare il form dove inserire le credenziali delle persone
-            e aggiungerle nel db 
-
-            eventualmente far pagare i bagagli aggiuntivi
-
-
-            mi serve la prenotazione per aggiungere i tizi al db
-        -->
+	   
 		<div>
 			<?php 
-				echo $data;
-				echo " ";
-				echo $ora ;
-				echo "  da ";
-				echo $partenza;
-				echo "  a ";
-				echo $destinazione;
+				echo '<div class="grid-container">';
 
+					echo '<div class="grid-row">';
+
+						echo '<div class="grid-item">';
+							echo 'Partenza';
+						echo '</div>';
+
+						echo '<div class="grid-item">';
+							echo 'Destinazione';
+						echo '</div>';
+
+						echo '<div class="grid-item">';
+							echo 'Data';
+						echo '</div>';
+
+					echo '</div>';
+			
+				
+					
+					
+					echo '<div class="grid-row"> ';
+				 
+						echo '<div class="grid-item">';
+							echo $partenza;
+						echo '</div>';
+
+						echo '<div class="grid-item">';
+							echo $destinazione;
+						echo '</div>';
+					
+						echo '<div class="grid-item">';
+							echo $data;
+							echo '<br>
+							'.$ora;
+						echo '</div>';
+					
+					echo '</div>';
+				
+
+				echo '</div>';
 			?>
 		</div>
 		
