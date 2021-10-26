@@ -86,13 +86,13 @@
                 <input id="name" maxlength="40" type="text"></br>
 
                 <label for="cardnumber">Numero carta di credito</label>
-                <input id="cardnumber" type="text" pattern="[0-9]{8}" inputmode="numeric"></br>
+                <input id="cardnumber" type="text" pattern="[0-9]{12}" inputmode="numeric"></br>
 
                 <label for="expirationdate">Scadenza (mm/yy)</label>    <!-- problemi con la data -->
                 <input id="expirationdate" type="text" pattern="[0-9]{2}[/][0-9]{2}" inputmode="numeric"></br>
 
                 <label for="securitycode">CVV</label>
-                <input id="securitycode" type="password" pattern="[0-9]*" inputmode="numeric"></br>
+                <input id="securitycode" type="password" pattern="[0-9]{3}" inputmode="numeric"></br>
                 <br>
                 <input type="submit" value="Paga adesso">
             </form>
