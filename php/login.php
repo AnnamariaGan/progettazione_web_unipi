@@ -11,7 +11,7 @@
 
 	$mail = $_POST['mail'];
 	$password = sha1(md5(sha1($_POST['psw'])));//$_POST['psw'];  
-    echo $password;
+    
 	$errorMessage = login($mail, $password);
    
 	if (!isset($errorMessage) ) {

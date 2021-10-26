@@ -36,18 +36,8 @@
 			order by V.`Data` DESC, V.`Ora` DESC, P.`check` DESC;");
 		$stmt->bind_param('s', $_SESSION['mail']);
 		$stmt->execute();
-		//$stmt->store_result();
 		$result = $stmt->get_result();
-/*
-		$queryText = "select * from volo V 
-					inner join rotta R on V.Rotta = R.idRotta 
-					inner join prenotazioni P on V.idvolo = P.volo
-					where P.utente = '".$_SESSION['mail']."'
-						AND P.`check` < P.`postiPrenotati`
-					order by V.`Data` DESC, V.`Ora` DESC, P.`check` DESC;" ;
-						
-		$result = $con->query($queryText);
-*/		
+	
 		if (!$result || mysqli_num_rows($result)==0) {
 			echo 'Non hai prenotato nessun volo.';
 		} else {  
@@ -64,7 +54,7 @@
 			echo '</div>';
 
 			echo '<div class="grid-item">';
-			echo 'Ora partenza';
+			echo 'Data';
 			echo '</div>';
 
 			echo '<div class="grid-item">';
@@ -95,7 +85,10 @@
 				echo '</div>';
 			
 				echo '<div class="grid-item">';
-				echo $row['Ora'];
+				echo $row['Data'];
+				echo '
+				
+				'.$row['Ora'];
 				echo '</div>';
 			
 				echo '<div class="grid-item">';
@@ -103,8 +96,8 @@
 				echo '</div>';
 
 				echo '<div class="grid-item">';
-				if ($row['check'] == 1){//'S') {
-					echo 'check-in effettuato';
+				if ($row['check'] == 1) {
+					echo "<button>check-in incompleto</button>";
 				} else {
 					echo "<button>FAI CHECK-IN</button>";
 				}

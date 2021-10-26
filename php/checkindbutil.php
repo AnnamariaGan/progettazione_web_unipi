@@ -24,17 +24,7 @@
 			VALUES(?, ?, ?, ?, ?);");
 		$stmt->bind_param('sssii', $nome, $cognome, $documento, $bambino, $idPrenotazione);
 		$stmt->execute();
-/*
-        $queryText = " INSERT INTO passeggero (Nome, Cognome, Documento, bambino, prenotazione)
-                VALUES('".$nome."', '".$cognome."', '".$documento."', ".$bambino.", ".$idPrenotazione.");";
-        
-        $stmt = $con->query($queryText);
-*/
 
-		//echo $queryText; 
-//<<<<<<<<<< TO DO:
-		//echo '<div id="loadedTickets">';
-		 
 		echo $nome.' '.$cognome.' '.$documento.' ';
 		if ($bambino == 1) {
 			echo 'bambino';

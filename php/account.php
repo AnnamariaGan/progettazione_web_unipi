@@ -29,7 +29,6 @@ include DIR_UTIL . "sessionUtil.php";
 		<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" /> 
 		<link href="/gandolfo/css/account.css" rel="stylesheet" type="text/css">
 		<script src="/gandolfo/js/valida.js"></script>
-		<script src="/gandolfo/js/account.js"></script>
 		<title>account</title>
 	</head>
 	
@@ -61,10 +60,10 @@ include DIR_UTIL . "sessionUtil.php";
 					<label for="psw"><b>Password</b></label>
    					<input id = "pswA" type="password" placeholder="Password" name="psw" required>
 				</div>
-				<div>
+				<!--div>
 					<input type="radio" id="ricordami" name="Ricordami" value="true" checked >
 					<label for = "ricordami">Resta collegato</label>
-				</div>
+				</div-->
 				<div>
 					<!--cliccando su accedi si cambia pagina. dobbiamo andare a profilo.php -->
      				<button type="submit">Accedi</button>  
